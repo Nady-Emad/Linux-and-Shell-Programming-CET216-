@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>syllabus_summary.html — CET216 Linux & Shell Programming</title>
+  <style>
+    :root {
+      --bg:#f5f7fb; --card:#ffffff; --ink:#172033; --muted:#5d6a7e;
+      --primary:#0f8b8d; --primary-dark:#073b4c; --accent:#f2b544;
+      --danger:#b42318; --green:#087443; --soft:#e7f6f6; --soft2:#fff7e6;
+      --line:#d9e2ec; --code:#111827; --code-ink:#e5e7eb;
+      --radius:18px; --shadow:0 10px 30px rgba(15,36,68,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Arial,Tahoma,sans-serif;background:linear-gradient(180deg,#f8fbff 0%,var(--bg) 100%);color:var(--ink);line-height:1.65}
+    a{color:var(--primary-dark);text-decoration:none} a:hover{text-decoration:underline}
+    .hero{background:linear-gradient(135deg,#061b38 0%,#073b4c 42%,#0f8b8d 100%);color:#fff;padding:44px 22px;border-radius:0 0 34px 34px;box-shadow:var(--shadow)}
+    .hero-inner,.page{max-width:1220px;margin:auto} .page{padding:24px}
+    .eyebrow{display:inline-block;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);padding:6px 12px;border-radius:999px;font-size:.9rem;margin-bottom:14px}
+    h1,h2,h3,h4{line-height:1.25;margin:0 0 12px} h1{font-size:clamp(2rem,4vw,3.4rem)}
+    h2{font-size:clamp(1.45rem,3vw,2.05rem);color:var(--primary-dark);margin-top:34px;padding-top:12px;border-top:4px solid var(--soft)}
+    h3{font-size:1.25rem;color:#123} h4{font-size:1.05rem;color:var(--primary-dark)}
+    .subtitle{font-size:1.16rem;opacity:.95;margin-top:8px}
+    .ar{direction:rtl;text-align:right;font-family:Tahoma,Arial,sans-serif} .ar-inline{font-family:Tahoma,Arial,sans-serif}
+    .grid,.two{display:grid;grid-template-columns:1fr 1fr;gap:16px} .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card,.mini{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:14px 0}
+    .note{border-left:6px solid var(--accent);background:var(--soft2);padding:15px 17px;border-radius:14px;margin:16px 0} .note.ar{border-left:0;border-right:6px solid var(--accent)}
+    .warn{border-left:6px solid var(--danger);background:#fff1f0;padding:15px 17px;border-radius:14px;margin:16px 0}
+    .toc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;list-style:none;padding:0;margin:0} .toc a{display:block;background:#fff;border:1px solid var(--line);padding:12px 14px;border-radius:12px;font-weight:700}
+    .pill{display:inline-block;background:var(--soft);color:var(--primary-dark);border-radius:999px;padding:5px 10px;font-size:.86rem;font-weight:700;margin:3px}
+    .source-pill{display:inline-block;background:#eef2ff;color:#26326b;border:1px solid #c7d2fe;border-radius:999px;padding:6px 10px;font-size:.85rem;margin:3px}
+    .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow);margin:16px 0}
+    table{border-collapse:collapse;width:100%;min-width:960px;background:#fff} th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+    th{background:#e9f7f7;color:#06494d;font-weight:800;position:sticky;top:0;z-index:1}
+    tr.group td{background:#073b4c;color:#fff;font-weight:800;text-align:center;letter-spacing:.2px}
+    code,kbd{font-family:Consolas,'Courier New',monospace;background:#eef2f7;color:#111827;padding:2px 5px;border-radius:6px;direction:ltr;unicode-bidi:embed}
+    pre{background:var(--code);color:var(--code-ink);padding:16px;border-radius:16px;overflow:auto;direction:ltr;text-align:left;border:1px solid #334155;line-height:1.55}
+    pre code{background:transparent;color:inherit;padding:0}
+    details{background:#fff;border:1px solid var(--line);border-radius:16px;margin:14px 0;box-shadow:var(--shadow);overflow:hidden}
+    summary{cursor:pointer;padding:16px 18px;font-weight:800;color:var(--primary-dark);background:#f3fbfb} .details-body{padding:0 18px 18px}
+    .kind{float:right;background:#eef2f7;color:#334155;border-radius:999px;padding:2px 8px;font-size:.78rem;font-weight:700}
+    .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px} .info-grid p{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px;margin:0}
+    .final{background:linear-gradient(135deg,#fff7e6,#ffffff 45%,#e7f6f6);border:2px solid var(--accent);border-radius:24px;padding:22px;box-shadow:0 14px 36px rgba(242,181,68,.18)}
+    .section-label{display:inline-flex;align-items:center;gap:8px;color:#fff;background:var(--primary-dark);border-radius:999px;padding:6px 12px;font-size:.9rem;font-weight:800;margin-bottom:10px}
+    .checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;list-style:none;padding:0} .checklist li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+    footer{text-align:center;color:var(--muted);padding:28px 0 10px}
+    @media (max-width:880px){.page{padding:14px}.grid,.grid3,.two,.info-grid,.checklist,.toc{grid-template-columns:1fr} table{min-width:860px} .kind{float:none;display:inline-block;margin-left:8px}}
+    @media print{body{background:#fff}.hero,.card,.table-wrap,details,.final,.mini{box-shadow:none}a{color:inherit;text-decoration:none}.page{max-width:none;padding:12mm}pre{white-space:pre-wrap}details{break-inside:avoid}summary{background:#fff}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">syllabus_summary.html • Updated with final revision questions and uploaded labs</div>
+      <h1>CET216 Linux & Shell Programming</h1>
+      <h1 class="ar" dir="rtl">برمجة لينكس والشل</h1>
+      <p class="subtitle">Bilingual Syllabus Summary / <span dir="rtl">ملخص المنهج بالعربي والإنجليزي</span></p>
+    </div>
+  </header>
+  <main class="page">
+    <section class="warn" id="source-note">
+      <h2 style="margin-top:0;border-top:0;padding-top:0;color:#7a271a">Source Grounding / <span dir="rtl">ملاحظة عن المصادر</span></h2>
+      <div class="grid">
+        <div><p><strong>Important:</strong> The files currently provided are for <strong>CET216 Linux & Shell Programming</strong>, including sessions 1–6, chapters 1–4 and 7, process notes, labs 5–9, and final revision QA. Files for <strong>Web and Security Technologies Chapters 1–5</strong>, Laravel, Composer, OpenSSL, Apache/XAMPP, OWASP web risks, SQL Injection, XSS, or SSL certificates are <strong>Not clearly stated in the provided course files</strong>.</p></div>
+        <div class="ar" dir="rtl"><p><strong>مهم:</strong> الملفات المتاحة تخص مادة <strong>CET216 Linux & Shell Programming</strong> وتشمل السيشنات 1–6، الفصول 1–4 و7، ملاحظات العمليات، لابات 5–9، وأسئلة المراجعة النهائية. ملفات <strong>Web and Security Technologies Chapters 1–5</strong> أو Laravel أو Composer أو OpenSSL أو Apache/XAMPP أو OWASP أو SQL Injection أو XSS أو SSL certificates <strong>غير مذكورة بوضوح في ملفات المادة المتاحة</strong>.</p></div>
+      </div>
+      <p><strong>Included uploaded files:</strong><br>
+        <span class="source-pill">Linux_Revision_QA Rev.pdf</span><span class="source-pill">01.pdf</span><span class="source-pill">02.pdf</span><span class="source-pill">03.pdf</span><span class="source-pill">04.pdf</span><span class="source-pill">05.pdf</span><span class="source-pill">06.pdf</span><span class="source-pill">Lab_5 OS1.pdf</span><span class="source-pill">Lab_6 OS1.pdf</span><span class="source-pill">Lab_7 OS1.pdf</span><span class="source-pill">Lab_8 OS1.pdf</span><span class="source-pill">Lab_9 OS1.pdf</span>
+      </p>
+    </section>
+
+    <section id="toc" class="card">
+      <h2 style="margin-top:0;border-top:0;padding-top:0">Table of Contents / <span dir="rtl">الفهرس</span></h2>
+      <ul class="toc">
+        <li><a href="#overview">Course Overview / نظرة عامة</a></li>
+        <li><a href="#chapters">Chapter-by-Chapter Summary / ملخص الفصول</a></li>
+        <li><a href="#commands">Commands Table / جدول الأوامر</a></li>
+        <li><a href="#config">Configuration & Syntax / الصيغ والإعدادات</a></li>
+        <li><a href="#scripts">Bash Programs / سكربتات Bash</a></li>
+        <li><a href="#security">Security Notes / ملاحظات أمنية</a></li>
+        <li><a href="#final-revision">Final Revision + Questions / المراجعة النهائية والأسئلة</a></li>
+        <li><a href="#quick-revision">Quick Revision / مراجعة سريعة</a></li>
+      </ul>
+    </section>
+
+    <section id="overview">
+      <h2>Course Overview / <span dir="rtl">نظرة عامة على المادة</span></h2>
+      <div class="grid">
+        <div class="card"><h3>English Summary</h3><p>This course teaches Linux command-line work and shell programming. It covers Linux concepts, distributions, installation environment, file system hierarchy, GUI vs shell access, command syntax, file and directory management, help/documentation, redirection, pipelines, permissions, users and groups, text editors, shell scripting, variables, arrays, operators, functions, processes, jobs, priorities, archives, links, and backup-focused scripts.</p></div>
+        <div class="card ar" dir="rtl"><h3>الملخص بالعربي</h3><p>المادة تشرح التعامل مع لينكس من سطر الأوامر وبرمجة الشل. وتشمل مفاهيم لينكس، التوزيعات، بيئة التثبيت، شجرة نظام الملفات، الوصول من GUI أو Shell، صيغة الأوامر، إدارة الملفات والمجلدات، المساعدة والتوثيق، إعادة التوجيه، الـ pipelines، الصلاحيات، المستخدمين والمجموعات، المحررات، سكربتات الشل، المتغيرات، المصفوفات، المعاملات، الدوال، العمليات، الـ jobs، الأولويات، الأرشفة، الروابط، وسكربتات النسخ الاحتياطي.</p></div>
+      </div>
+      <div class="card">
+        <h3>Exam Weight and Format / <span dir="rtl">شكل الامتحان والدرجات</span></h3>
+        <div class="grid">
+          <ul><li>Course evaluation includes final exam, labs, assignments, project, quizzes, and midterm.</li><li>Final revision exam format: MCQ & Complete, Match, What is the Output, Write Command/Script.</li></ul>
+          <ul class="ar" dir="rtl"><li>تقييم المادة يشمل النهائي واللابات والتكليفات والمشروع والكويزات والميدترم.</li><li>شكل أسئلة المراجعة النهائية: اختيار/إكمال، توصيل، توقع المخرجات، وكتابة أوامر/سكربت.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="chapters">
+      <h2>Chapter-by-Chapter Summary / <span dir="rtl">ملخص فصل بفصل</span></h2>
+      <article class="card"><span class="section-label">Session / Chapter 1</span><div class="grid"><div><h3>Linux Concepts, Installation, and System Access</h3><p>Introduces Linux, open source, GNU/GPL, distributions, Red Hat/Fedora/community versions, Unix/Linux/Windows comparison, file system hierarchy, hard partitioning, swap, VMware/RHEL installation, GUI access, shell access, virtual consoles, and command prompt structure.</p><p><strong>Practical concepts:</strong> VMware setup, virtual consoles, prompt meaning, <code>whoami</code>, <code>w</code>, <code>cd</code>, <code>pwd</code>, <code>ls</code>, <code>date</code>, <code>cal</code>, <code>cat</code>, <code>head</code>, <code>tail</code>, <code>less</code>, <code>wc</code>.</p><p><strong>Security concepts:</strong> root account, file permissions, swap/partition decisions, system access, and Linux security advantages.</p></div><div class="ar" dir="rtl"><h3>مفاهيم لينكس والتثبيت والوصول للنظام</h3><p>يعرض لينكس والمصدر المفتوح وGNU/GPL والتوزيعات وإصدارات Red Hat/Fedora/community والمقارنة بين Unix/Linux/Windows وشجرة الملفات والتقسيم وswap والتثبيت على VMware/RHEL والوصول من GUI أو Shell والطرفيات الافتراضية وشكل prompt.</p><p><strong>مفاهيم عملية:</strong> إعداد VMware، الطرفيات الافتراضية، معنى prompt، وأوامر <code>whoami</code> و <code>w</code> و <code>cd</code> و <code>pwd</code> و <code>ls</code> و <code>date</code> و <code>cal</code> و <code>cat</code> و <code>head</code> و <code>tail</code> و <code>less</code> و <code>wc</code>.</p><p><strong>مفاهيم أمنية:</strong> حساب root، صلاحيات الملفات، قرارات التقسيم وswap، الوصول للنظام، وميزات أمان لينكس.</p></div></div></article>
+      <article class="card"><span class="section-label">Session / Chapter 2</span><div class="grid"><div><h3>Managing Files, Directories, Paths, Links, and Help</h3><p>Covers relative and absolute paths, file/directory operations, globbing, hidden files, symbolic and hard links, colors of file types, help commands, local documentation, and practical tasks.</p><p><strong>Practical concepts:</strong> <code>touch</code>, <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>rm</code>, <code>ln</code>, <code>ln -s</code>, <code>man</code>, <code>info</code>, <code>pinfo</code>, <code>--help</code>, <code>/usr/share/doc</code>.</p><p><strong>Security concepts:</strong> permission denied troubleshooting, symbolic link risks, careful deletion, and knowing what file you are editing.</p></div><div class="ar" dir="rtl"><h3>إدارة الملفات والمجلدات والمسارات والروابط والمساعدة</h3><p>يتناول المسارات المطلقة والنسبية، أوامر الملفات والمجلدات، globbing، الملفات المخفية، الروابط الرمزية والصلبة، ألوان أنواع الملفات، أوامر المساعدة، التوثيق المحلي، والتدريبات العملية.</p><p><strong>مفاهيم عملية:</strong> <code>touch</code> و <code>mkdir</code> و <code>cp</code> و <code>mv</code> و <code>rm</code> و <code>ln</code> و <code>ln -s</code> و <code>man</code> و <code>info</code> و <code>pinfo</code> و <code>--help</code> و <code>/usr/share/doc</code>.</p><p><strong>مفاهيم أمنية:</strong> حل مشاكل permission denied، مخاطر soft links، الحذر من الحذف، ومعرفة الملف قبل تعديله.</p></div></div></article>
+      <article class="card"><span class="section-label">Session / Chapter 3</span><div class="grid"><div><h3>Text Files, Redirection, Pipelines, Editors, and Permissions</h3><p>Explains stdin/stdout/stderr, redirection symbols, combining files, find/grep usage, pipelines, text editors from shell prompt, vi/vim modes, and basic/special permissions.</p><p><strong>Practical concepts:</strong> <code>></code>, <code>&gt;&gt;</code>, <code>2&gt;</code>, <code>&amp;&gt;</code>, <code>2&gt;/dev/null</code>, <code>|</code>, <code>cat</code>, <code>grep</code>, <code>wc</code>, <code>vim</code>, <code>vi</code>, <code>nano</code>, <code>gedit</code>, <code>chmod</code>.</p><p><strong>Security concepts:</strong> stderr handling, safe overwrite vs append, permissions r/w/x, setuid/setgid/sticky bit concepts.</p></div><div class="ar" dir="rtl"><h3>الملفات النصية وإعادة التوجيه والـ pipelines والمحررات والصلاحيات</h3><p>يشرح stdin/stdout/stderr ورموز إعادة التوجيه ودمج الملفات واستخدام find/grep والـ pipelines ومحررات النص من الشل وأوضاع vi/vim والصلاحيات الأساسية والخاصة.</p><p><strong>مفاهيم عملية:</strong> <code>></code> و <code>&gt;&gt;</code> و <code>2&gt;</code> و <code>&amp;&gt;</code> و <code>2&gt;/dev/null</code> و <code>|</code> و <code>cat</code> و <code>grep</code> و <code>wc</code> و <code>vim</code> و <code>vi</code> و <code>nano</code> و <code>gedit</code> و <code>chmod</code>.</p><p><strong>مفاهيم أمنية:</strong> التعامل مع stderr، الفرق بين overwrite و append، صلاحيات r/w/x، ومفاهيم setuid/setgid/sticky bit.</p></div></div></article>
+      <article class="card"><span class="section-label">Session / Chapter 4</span><div class="grid"><div><h3>Local Users, Groups, Passwords, Shadow File, and Sudo</h3><p>Covers user types, UID ranges, primary and secondary groups, user/group creation, modification, deletion, password policies, login shells, shadow file fields, sudo, wheel group, and admin logs.</p><p><strong>Practical concepts:</strong> <code>useradd</code>, <code>passwd</code>, <code>usermod</code>, <code>userdel</code>, <code>groupadd</code>, <code>groupmod</code>, <code>groupdel</code>, <code>gpasswd</code>, <code>chage</code>, <code>sudo</code>, <code>/etc/passwd</code>, <code>/etc/shadow</code>, <code>/etc/group</code>, <code>/etc/sudoers</code>.</p><p><strong>Security concepts:</strong> encrypted passwords, account locking, password aging, no-login shell, least privilege, sudo logging.</p></div><div class="ar" dir="rtl"><h3>المستخدمون والمجموعات وكلمات المرور وملف shadow و sudo</h3><p>يتناول أنواع المستخدمين، نطاقات UID، المجموعات الأساسية والثانوية، إنشاء وتعديل وحذف المستخدمين والمجموعات، سياسات كلمات المرور، login shells، حقول ملف shadow، sudo، wheel group، وسجلات الإدارة.</p><p><strong>مفاهيم عملية:</strong> <code>useradd</code> و <code>passwd</code> و <code>usermod</code> و <code>userdel</code> و <code>groupadd</code> و <code>groupmod</code> و <code>groupdel</code> و <code>gpasswd</code> و <code>chage</code> و <code>sudo</code> و <code>/etc/passwd</code> و <code>/etc/shadow</code> و <code>/etc/group</code> و <code>/etc/sudoers</code>.</p><p><strong>مفاهيم أمنية:</strong> كلمات المرور المشفرة، قفل الحساب، password aging، شل no-login، أقل صلاحية، وتسجيل أوامر sudo.</p></div></div></article>
+      <article class="card"><span class="section-label">Sessions 5–6 + Labs 5–9</span><div class="grid"><div><h3>Shell Programming, Variables, Decisions, Loops, and Functions</h3><p>Covers shell types, creating and running scripts, shebangs, editors, variables, readonly variables, special variables, arrays, arithmetic/relational/boolean/string/file operators, if/elif/else, case, functions, local/global variables, and practical lab scripts.</p><p><strong>Practical concepts:</strong> <code>#!/bin/bash</code>, <code>#!/usr/bin/env bash</code>, <code>chmod +x</code>, <code>./script.sh</code>, <code>read</code>, <code>echo</code>, <code>$0</code>, <code>$1</code>, <code>$#</code>, <code>$?</code>, <code>$RANDOM</code>, <code>for</code>, <code>while</code>, <code>until</code>, <code>break</code>, <code>continue</code>, functions.</p><p><strong>Security concepts:</strong> silent password input, input validation, quoting variables, checking files before editing or deleting.</p></div><div class="ar" dir="rtl"><h3>برمجة الشل والمتغيرات والشروط والحلقات والدوال</h3><p>يتناول أنواع الشل، إنشاء وتشغيل السكربت، shebang، المحررات، المتغيرات، readonly، المتغيرات الخاصة، المصفوفات، المعاملات الحسابية والمنطقية والنصية ومعاملات الملفات، if/elif/else، case، الدوال، المتغيرات المحلية والعامة، وسكربتات اللابات.</p><p><strong>مفاهيم عملية:</strong> <code>#!/bin/bash</code> و <code>#!/usr/bin/env bash</code> و <code>chmod +x</code> و <code>./script.sh</code> و <code>read</code> و <code>echo</code> و <code>$0</code> و <code>$1</code> و <code>$#</code> و <code>$?</code> و <code>$RANDOM</code> و <code>for</code> و <code>while</code> و <code>until</code> و <code>break</code> و <code>continue</code> والدوال.</p><p><strong>مفاهيم أمنية:</strong> إدخال كلمة المرور بصمت، التحقق من الإدخال، وضع المتغيرات بين quotes، وفحص الملفات قبل التعديل أو الحذف.</p></div></div></article>
+      <article class="card"><span class="section-label">Chapter 7 / Process Notes</span><div class="grid"><div><h3>Monitoring and Managing Linux Processes</h3><p>Covers process definition, PID, PPID, child process, systemd as first system process on RHEL7, listing processes, real-time monitoring, GUI monitoring, jobs, foreground/background processes, signals, killing processes, and process priorities.</p><p><strong>Practical concepts:</strong> <code>echo $$</code>, <code>bash</code>, <code>ps</code>, <code>ps aux</code>, <code>ps -ef</code>, <code>pstree</code>, <code>pgrep</code>, <code>pidof</code>, <code>top</code>, <code>jobs</code>, <code>fg</code>, <code>bg</code>, <code>kill</code>, <code>pkill</code>, <code>killall</code>, <code>nice</code>, <code>renice</code>.</p><p><strong>Security concepts:</strong> root can affect all processes, SIGKILL must be used carefully, process ownership matters, and background processes may detach from terminal.</p></div><div class="ar" dir="rtl"><h3>مراقبة وإدارة عمليات لينكس</h3><p>يتناول تعريف العملية، PID، PPID، child process، كون systemd أول عملية في RHEL7، عرض العمليات، المراقبة اللحظية، المراقبة الرسومية، jobs، العمليات الأمامية والخلفية، الإشارات، قتل العمليات، وأولويات العمليات.</p><p><strong>مفاهيم عملية:</strong> <code>echo $$</code> و <code>bash</code> و <code>ps</code> و <code>ps aux</code> و <code>ps -ef</code> و <code>pstree</code> و <code>pgrep</code> و <code>pidof</code> و <code>top</code> و <code>jobs</code> و <code>fg</code> و <code>bg</code> و <code>kill</code> و <code>pkill</code> و <code>killall</code> و <code>nice</code> و <code>renice</code>.</p><p><strong>مفاهيم أمنية:</strong> root يستطيع التأثير على كل العمليات، يجب الحذر مع SIGKILL، ملكية العملية مهمة، والعمليات الخلفية قد تنفصل عن الطرفية.</p></div></div></article>
+    </section>
+
+    <section id="commands">
+      <h2>Commands Table / <span dir="rtl">جدول الأوامر</span></h2>
+      <div class="note"><strong>Course-grounded rule:</strong> Commands below are included because they appear in the uploaded Linux course files, labs, or final revision. Laravel, Composer, OpenSSL, Apache/XAMPP command groups are omitted because they are not clearly stated in the provided course files.</div>
+      <div class="table-wrap"><table><thead><tr><th>Command</th><th>Category</th><th>Where it is used</th><th>Explanation in English</th><th class="ar" dir="rtl">الشرح بالعربي</th><th>Example</th><th>Notes / Warnings</th></tr></thead><tbody><tr class="group"><td colspan="7">Terminal</td></tr>
+<tr><td><code>chvt</code></td><td>Terminal / Virtual Console</td><td>Accessing command line</td><td>Changes active virtual terminal.</td><td class="ar" dir="rtl">ينقل إلى طرفية افتراضية برقم محدد.</td><td><code>chvt 3</code></td><td>Needs suitable privileges; verify with tty.</td></tr>
+<tr><td><code>tty</code></td><td>Terminal / Virtual Console</td><td>Accessing command line</td><td>Prints the current terminal device.</td><td class="ar" dir="rtl">يعرض الطرفية الحالية.</td><td><code>tty</code></td><td>/dev/pts/* is pseudo terminal; /dev/tty* is tele-type terminal.</td></tr>
+<tr><td><code>clear</code></td><td>Terminal</td><td>Shell basics</td><td>Clears the screen.</td><td class="ar" dir="rtl">يمسح شاشة الطرفية.</td><td><code>clear</code></td><td>Shortcut: Ctrl+l.</td></tr>
+<tr><td><code>reset</code></td><td>Terminal</td><td>Shell basics</td><td>Resets terminal display state.</td><td class="ar" dir="rtl">يعيد ضبط حالة الطرفية.</td><td><code>reset</code></td><td>Useful if terminal output becomes corrupted.</td></tr>
+<tr><td><code>exit</code></td><td>Terminal</td><td>Shell sessions</td><td>Closes current shell session.</td><td class="ar" dir="rtl">يغلق جلسة الشل الحالية.</td><td><code>exit</code></td><td>Shortcut: Ctrl+d.</td></tr>
+<tr><td><code>logout</code></td><td>Terminal</td><td>Shell sessions</td><td>Logs out from login shell.</td><td class="ar" dir="rtl">يسجل خروج من جلسة الشل.</td><td><code>logout</code></td><td>Works in login shells.</td></tr>
+<tr class="group"><td colspan="7">File system</td></tr>
+<tr><td><code>pwd</code></td><td>File system</td><td>Navigation</td><td>Prints current working directory.</td><td class="ar" dir="rtl">يعرض المسار الحالي.</td><td><code>pwd</code></td><td>Use before destructive commands.</td></tr>
+<tr><td><code>cd</code></td><td>File system</td><td>Navigation</td><td>Changes directory.</td><td class="ar" dir="rtl">ينتقل بين المجلدات.</td><td><code>cd /home/lab ; cd .. ; cd -</code></td><td>cd alone returns to home.</td></tr>
+<tr class="group"><td colspan="7">File listing</td></tr>
+<tr><td><code>ls</code></td><td>File listing</td><td>Listing files/directories</td><td>Lists files and directories.</td><td class="ar" dir="rtl">يعرض الملفات والمجلدات.</td><td><code>ls -la /home</code></td><td>-a hidden, -l long, -h human, -R recursive, -t time, -r reverse.</td></tr>
+<tr><td><code>dir</code></td><td>File listing</td><td>Listing files/directories</td><td>Lists directory contents.</td><td class="ar" dir="rtl">يعرض محتويات المجلد.</td><td><code>dir --color</code></td><td>Similar listing purpose to ls.</td></tr>
+<tr class="group"><td colspan="7">File inspection</td></tr>
+<tr><td><code>file</code></td><td>File inspection</td><td>File type</td><td>Identifies file type.</td><td class="ar" dir="rtl">يحدد نوع الملف.</td><td><code>file /etc/passwd</code></td><td>Useful before editing/executing.</td></tr>
+<tr class="group"><td colspan="7">File creation</td></tr>
+<tr><td><code>touch</code></td><td>File creation</td><td>Managing files</td><td>Creates empty files or updates timestamps.</td><td class="ar" dir="rtl">ينشئ ملفات فارغة أو يحدث وقتها.</td><td><code>touch file1 FILE1</code></td><td>Linux is case-sensitive.</td></tr>
+<tr class="group"><td colspan="7">Directory creation</td></tr>
+<tr><td><code>mkdir</code></td><td>Directory creation</td><td>Managing directories</td><td>Creates directories.</td><td class="ar" dir="rtl">ينشئ مجلدات.</td><td><code>mkdir -p dir01/dir02</code></td><td>Use quotes or backslash for spaces.</td></tr>
+<tr class="group"><td colspan="7">Copy</td></tr>
+<tr><td><code>cp</code></td><td>Copy</td><td>Managing files/directories</td><td>Copies files or directories.</td><td class="ar" dir="rtl">ينسخ الملفات أو المجلدات.</td><td><code>cp -pr projectX /tmp/backup/</code></td><td>Use -r/-R for directories; -p preserves attributes.</td></tr>
+<tr class="group"><td colspan="7">Move</td></tr>
+<tr><td><code>mv</code></td><td>Move / Rename</td><td>Managing files/directories</td><td>Moves or renames files/directories.</td><td class="ar" dir="rtl">ينقل أو يعيد تسمية الملفات.</td><td><code>mv fileC /tmp/backup/fileC_backup</code></td><td>Destination permissions may differ from copy behavior.</td></tr>
+<tr class="group"><td colspan="7">Remove</td></tr>
+<tr><td><code>rm</code></td><td>Remove</td><td>Managing files/directories</td><td>Removes files/directories.</td><td class="ar" dir="rtl">يحذف ملفات أو مجلدات.</td><td><code>rm -rf dir03/*</code></td><td>Dangerous with -rf; check path first.</td></tr>
+<tr><td><code>rmdir</code></td><td>Remove</td><td>Managing directories</td><td>Removes empty directory only.</td><td class="ar" dir="rtl">يحذف مجلدًا فارغًا فقط.</td><td><code>rmdir dir1</code></td><td>Fails if directory is not empty.</td></tr>
+<tr class="group"><td colspan="7">Links</td></tr>
+<tr><td><code>ln</code></td><td>Links</td><td>File links</td><td>Creates hard links by default.</td><td class="ar" dir="rtl">ينشئ hard link افتراضيًا.</td><td><code>ln original hardlink</code></td><td>Hard links share inode.</td></tr>
+<tr><td><code>ln -s</code></td><td>Links</td><td>File links</td><td>Creates symbolic/soft links.</td><td class="ar" dir="rtl">ينشئ soft/symbolic link.</td><td><code>ln -s /home/lab/test01 desktop/testxy</code></td><td>Breaks if target path is removed.</td></tr>
+<tr class="group"><td colspan="7">Inode</td></tr>
+<tr><td><code>stat</code></td><td>Inode / metadata</td><td>Hard-link audit</td><td>Shows file metadata; can print inode.</td><td class="ar" dir="rtl">يعرض بيانات الملف ومنها inode.</td><td><code>stat -c %i /etc/hostname</code></td><td>Used with find -inum.</td></tr>
+<tr class="group"><td colspan="7">Search</td></tr>
+<tr><td><code>find</code></td><td>Search</td><td>Finding files/directories</td><td>Searches live filesystem by name, type, inode, size, owner, etc.</td><td class="ar" dir="rtl">يبحث مباشرة داخل نظام الملفات.</td><td><code>find / -type f | wc -l</code></td><td>Can generate permission errors; redirect stderr if needed.</td></tr>
+<tr><td><code>locate</code></td><td>Search</td><td>Finding files</td><td>Fast search using database.</td><td class="ar" dir="rtl">بحث سريع باستخدام قاعدة بيانات.</td><td><code>locate passwd</code></td><td>May need updatedb first.</td></tr>
+<tr><td><code>updatedb</code></td><td>Search</td><td>Locate database</td><td>Updates locate database.</td><td class="ar" dir="rtl">يحدث قاعدة بيانات locate.</td><td><code>updatedb</code></td><td>May require root/sudo.</td></tr>
+<tr><td><code>which</code></td><td>Search / command path</td><td>Command location</td><td>Shows executable path.</td><td class="ar" dir="rtl">يعرض مسار الأمر التنفيذي.</td><td><code>which passwd</code></td><td>which -a can show duplicates.</td></tr>
+<tr class="group"><td colspan="7">File viewing</td></tr>
+<tr><td><code>cat</code></td><td>File viewing</td><td>Viewing/combining text</td><td>Displays or concatenates files.</td><td class="ar" dir="rtl">يعرض أو يدمج ملفات نصية.</td><td><code>cat file1 file2 &gt; allinone</code></td><td>Use less for long files.</td></tr>
+<tr><td><code>head</code></td><td>File viewing</td><td>Viewing beginning of files</td><td>Shows first lines.</td><td class="ar" dir="rtl">يعرض أول سطور.</td><td><code>head -n 2 anaconda-ks.cfg</code></td><td>Common in pipelines.</td></tr>
+<tr><td><code>tail</code></td><td>File viewing</td><td>Viewing end of files/logs</td><td>Shows last lines.</td><td class="ar" dir="rtl">يعرض آخر سطور.</td><td><code>tail -n 100 /var/log/dmesg</code></td><td>Useful for logs.</td></tr>
+<tr class="group"><td colspan="7">Pager</td></tr>
+<tr><td><code>less</code></td><td>Pager</td><td>Viewing long output</td><td>Displays output page by page.</td><td class="ar" dir="rtl">يعرض المخرجات الطويلة صفحة بصفحة.</td><td><code>ls -l /usr/bin | less</code></td><td>Search with /key; q to quit; g/G navigation.</td></tr>
+<tr><td><code>more</code></td><td>Pager</td><td>Viewing files</td><td>Displays output page by page.</td><td class="ar" dir="rtl">يعرض الملف على صفحات.</td><td><code>more file.txt</code></td><td>Simpler pager.</td></tr>
+<tr class="group"><td colspan="7">Filter</td></tr>
+<tr><td><code>grep</code></td><td>Filter</td><td>Searching content</td><td>Finds lines matching a pattern.</td><td class="ar" dir="rtl">يبحث داخل محتوى الملفات.</td><td><code>grep lab /etc/passwd</code></td><td>Use -n for line numbers; -i ignore case.</td></tr>
+<tr class="group"><td colspan="7">Text processing</td></tr>
+<tr><td><code>awk</code></td><td>Text processing</td><td>Filters</td><td>Processes fields and patterns.</td><td class="ar" dir="rtl">يعالج الحقول والأنماط.</td><td><code>awk -F: &#x27;{print $1,$3}&#x27; /etc/passwd</code></td><td>Good for colon-separated files.</td></tr>
+<tr><td><code>cut</code></td><td>Text processing</td><td>Filters</td><td>Extracts fields/characters.</td><td class="ar" dir="rtl">يقتطع حقولًا أو أحرفًا.</td><td><code>cut -d: -f1 /etc/passwd</code></td><td>Delimiter matters.</td></tr>
+<tr><td><code>sort</code></td><td>Text processing</td><td>Filters</td><td>Sorts lines.</td><td class="ar" dir="rtl">يرتب السطور.</td><td><code>sort names.txt</code></td><td>Often used before uniq.</td></tr>
+<tr><td><code>uniq</code></td><td>Text processing</td><td>Filters</td><td>Removes adjacent duplicates.</td><td class="ar" dir="rtl">يزيل السطور المكررة المتجاورة.</td><td><code>sort file | uniq</code></td><td>Sort first for reliable duplicate removal.</td></tr>
+<tr><td><code>wc</code></td><td>Text processing</td><td>Counting</td><td>Counts lines, words, bytes/characters.</td><td class="ar" dir="rtl">يعد السطور والكلمات والأحرف/البايت.</td><td><code>who | wc -l</code></td><td>-l lines, -w words, -c bytes.</td></tr>
+<tr><td><code>sed</code></td><td>Text processing</td><td>Search and replace</td><td>Stream editor used for substitution.</td><td class="ar" dir="rtl">محرر نصوص تياري للاستبدال.</td><td><code>sed -i &quot;s/old/new/g&quot; file</code></td><td>-i edits original file; backup first.</td></tr>
+<tr><td><code>tr</code></td><td>Text processing</td><td>Character translate/delete</td><td>Translates or deletes characters.</td><td class="ar" dir="rtl">يحول أو يحذف أحرفًا.</td><td><code>echo abc | tr a-z A-Z</code></td><td>Works character by character.</td></tr>
+<tr class="group"><td colspan="7">Pipe</td></tr>
+<tr><td><code>tee</code></td><td>Pipe / output</td><td>Pipelines</td><td>Displays output and writes to file.</td><td class="ar" dir="rtl">يعرض الخرج ويحفظه في ملف.</td><td><code>ls -l | tee /tmp/saved-output</code></td><td>-a appends.</td></tr>
+<tr class="group"><td colspan="7">Pipeline output</td></tr>
+<tr><td><code>mail</code></td><td>Pipeline output</td><td>Sending command output</td><td>Sends output as mail.</td><td class="ar" dir="rtl">يرسل الخرج كبريد.</td><td><code>ls -l | mail -s subject root</code></td><td>Needs mail configuration.</td></tr>
+<tr class="group"><td colspan="7">Shell</td></tr>
+<tr><td><code>echo</code></td><td>Shell / Script</td><td>Output and variables</td><td>Prints text/values.</td><td class="ar" dir="rtl">يطبع نصًا أو قيمة متغير.</td><td><code>echo &quot;Today is $(date)&quot;</code></td><td>Quote variables to preserve spaces.</td></tr>
+<tr class="group"><td colspan="7">Bash input</td></tr>
+<tr><td><code>read</code></td><td>Bash input</td><td>User input</td><td>Reads input into variables.</td><td class="ar" dir="rtl">يقرأ إدخال المستخدم.</td><td><code>read -s -p &quot;Enter password: &quot; password</code></td><td>-s hides input; -p prompt; -t timeout; -n length.</td></tr>
+<tr class="group"><td colspan="7">Environment</td></tr>
+<tr><td><code>export</code></td><td>Environment</td><td>Environment variables</td><td>Creates/exports environment variable.</td><td class="ar" dir="rtl">ينشئ أو يصدر متغير بيئة.</td><td><code>export new_var=100</code></td><td>Temporary unless saved in ~/.bashrc.</td></tr>
+<tr><td><code>unset</code></td><td>Environment / Arrays</td><td>Variables</td><td>Removes variable or array element.</td><td class="ar" dir="rtl">يحذف متغيرًا أو عنصر مصفوفة.</td><td><code>unset colors[1]</code></td><td>Cannot remove readonly variables.</td></tr>
+<tr class="group"><td colspan="7">Variables</td></tr>
+<tr><td><code>readonly</code></td><td>Variables</td><td>Shell scripting</td><td>Makes variable unchangeable.</td><td class="ar" dir="rtl">يجعل المتغير غير قابل للتغيير.</td><td><code>readonly PI=3.14</code></td><td>Causes error if changed later.</td></tr>
+<tr class="group"><td colspan="7">Arithmetic</td></tr>
+<tr><td><code>let</code></td><td>Arithmetic</td><td>Shell scripting</td><td>Performs arithmetic assignment.</td><td class="ar" dir="rtl">ينفذ عملية حسابية.</td><td><code>let sum=x+y</code></td><td>Alternative: sum=$((x+y)).</td></tr>
+<tr><td><code>expr</code></td><td>Arithmetic</td><td>Lab scripts</td><td>Evaluates expressions.</td><td class="ar" dir="rtl">ينفذ تعبيرات حسابية.</td><td><code>expr $x + $y</code></td><td>Escape multiplication as \*.</td></tr>
+<tr><td><code>bc</code></td><td>Arithmetic</td><td>Decimal calculations</td><td>Calculator language for decimal math.</td><td class="ar" dir="rtl">آلة حاسبة نصية للكسور.</td><td><code>echo &quot;scale=3; 5/3&quot; | bc</code></td><td>May not be installed by default.</td></tr>
+<tr class="group"><td colspan="7">Permissions</td></tr>
+<tr><td><code>chmod</code></td><td>Permissions</td><td>File permissions/scripts</td><td>Changes permissions.</td><td class="ar" dir="rtl">يغير الصلاحيات.</td><td><code>chmod +x main.sh ; chmod 777 video</code></td><td>Use carefully; avoid overly open permissions.</td></tr>
+<tr><td><code>umask</code></td><td>Permissions</td><td>Default permissions</td><td>Controls default permission mask.</td><td class="ar" dir="rtl">يتحكم في الصلاحيات الافتراضية.</td><td><code>umask</code></td><td>Mentioned conceptually with defaults.</td></tr>
+<tr class="group"><td colspan="7">Ownership</td></tr>
+<tr><td><code>chown</code></td><td>Ownership</td><td>File access</td><td>Changes file owner/group.</td><td class="ar" dir="rtl">يغير مالك الملف أو المجموعة.</td><td><code>chown user:group file</code></td><td>Ownership controls access.</td></tr>
+<tr class="group"><td colspan="7">Authentication</td></tr>
+<tr><td><code>passwd</code></td><td>Authentication</td><td>Password management</td><td>Changes user password; can lock/unlock with options.</td><td class="ar" dir="rtl">يغير كلمة المرور ويمكن القفل/الفك بخيارات.</td><td><code>passwd dina ; passwd -l dina</code></td><td>Password security command.</td></tr>
+<tr><td><code>su</code></td><td>Authentication</td><td>Switch user</td><td>Switches to another user.</td><td class="ar" dir="rtl">ينتقل لمستخدم آخر.</td><td><code>su - root</code></td><td>Root has full control.</td></tr>
+<tr class="group"><td colspan="7">Privilege</td></tr>
+<tr><td><code>sudo</code></td><td>Privilege</td><td>Admin commands</td><td>Runs command with elevated privileges.</td><td class="ar" dir="rtl">يشغل أمرًا بصلاحيات أعلى.</td><td><code>sudo useradd ashraf4</code></td><td>sudo actions are saved in logs.</td></tr>
+<tr class="group"><td colspan="7">Users</td></tr>
+<tr><td><code>whoami</code></td><td>Users</td><td>Identity</td><td>Shows current username.</td><td class="ar" dir="rtl">يعرض اسم المستخدم الحالي.</td><td><code>whoami</code></td><td>Useful after su/sudo.</td></tr>
+<tr><td><code>who</code></td><td>Users</td><td>Logged-in users</td><td>Shows users logged in.</td><td class="ar" dir="rtl">يعرض المستخدمين المسجلين.</td><td><code>who | wc -l</code></td><td>Used in output questions.</td></tr>
+<tr><td><code>w</code></td><td>Users</td><td>Logged-in activity</td><td>Shows logged users and their activity.</td><td class="ar" dir="rtl">يعرض المستخدمين وما يفعلونه.</td><td><code>w</code></td><td>Includes load average.</td></tr>
+<tr><td><code>id</code></td><td>Users / Groups</td><td>Identity</td><td>Shows UID, GID, and groups.</td><td class="ar" dir="rtl">يعرض UID و GID والمجموعات.</td><td><code>id dina1 ; id -u dina1</code></td><td>Useful to verify users/groups.</td></tr>
+<tr class="group"><td colspan="7">User management</td></tr>
+<tr><td><code>useradd</code></td><td>User management</td><td>Create users</td><td>Adds user accounts.</td><td class="ar" dir="rtl">ينشئ مستخدمين.</td><td><code>useradd -G admin -u 1005 -s /usr/sbin/nologin dina1</code></td><td>Set password after creating user.</td></tr>
+<tr><td><code>usermod</code></td><td>User management</td><td>Modify users</td><td>Changes user attributes.</td><td class="ar" dir="rtl">يعدل خصائص مستخدم.</td><td><code>usermod -aG wheel ashraf</code></td><td>-G overwrites; -aG appends.</td></tr>
+<tr><td><code>userdel</code></td><td>User management</td><td>Delete users</td><td>Deletes user accounts.</td><td class="ar" dir="rtl">يحذف مستخدمين.</td><td><code>userdel -r dina1</code></td><td>-r removes home directory; use carefully.</td></tr>
+<tr class="group"><td colspan="7">Group management</td></tr>
+<tr><td><code>groupadd</code></td><td>Group management</td><td>Create groups</td><td>Creates group accounts.</td><td class="ar" dir="rtl">ينشئ مجموعات.</td><td><code>groupadd -g 1005 admin</code></td><td>Avoid conflicts with existing GID.</td></tr>
+<tr><td><code>groupmod</code></td><td>Group management</td><td>Modify groups</td><td>Changes group name/GID.</td><td class="ar" dir="rtl">يعدل اسم أو GID المجموعة.</td><td><code>groupmod -n new old</code></td><td>Check affected users.</td></tr>
+<tr><td><code>groupdel</code></td><td>Group management</td><td>Delete groups</td><td>Removes groups.</td><td class="ar" dir="rtl">يحذف مجموعات.</td><td><code>groupdel admin</code></td><td>Check memberships first.</td></tr>
+<tr><td><code>gpasswd</code></td><td>Group management</td><td>Group membership</td><td>Manages group users/passwords.</td><td class="ar" dir="rtl">يدير أعضاء المجموعة.</td><td><code>gpasswd -d ashraf3 marketing</code></td><td>Used to remove a user from group.</td></tr>
+<tr class="group"><td colspan="7">Password policy</td></tr>
+<tr><td><code>chage</code></td><td>Password policy</td><td>Password aging</td><td>Changes password aging/expiry.</td><td class="ar" dir="rtl">يضبط عمر وانتهاء كلمة المرور.</td><td><code>chage -l ashraf</code></td><td>Security-sensitive.</td></tr>
+<tr class="group"><td colspan="7">Editor</td></tr>
+<tr><td><code>vim / vi</code></td><td>Editor</td><td>Editing text/scripts</td><td>Terminal text editor with modes.</td><td class="ar" dir="rtl">محرر نصوص داخل الطرفية.</td><td><code>vim file1 ; :wq</code></td><td>Modes: normal/insert/ex/visual.</td></tr>
+<tr><td><code>nano</code></td><td>Editor</td><td>Editing scripts</td><td>Simple terminal editor.</td><td class="ar" dir="rtl">محرر بسيط داخل الطرفية.</td><td><code>nano main.sh</code></td><td>Ctrl+x, y, Enter to save in lab.</td></tr>
+<tr><td><code>gedit</code></td><td>Editor</td><td>GUI editing</td><td>Graphical text editor.</td><td class="ar" dir="rtl">محرر نصوص رسومي.</td><td><code>gedit file1</code></td><td>Needs GUI.</td></tr>
+<tr class="group"><td colspan="7">GNOME help</td></tr>
+<tr><td><code>yelp</code></td><td>GNOME help</td><td>Desktop help</td><td>Opens GNOME help.</td><td class="ar" dir="rtl">يفتح مساعدة GNOME.</td><td><code>yelp</code></td><td>GUI help command.</td></tr>
+<tr class="group"><td colspan="7">Documentation</td></tr>
+<tr><td><code>man</code></td><td>Documentation</td><td>Manual pages</td><td>Displays manual pages.</td><td class="ar" dir="rtl">يعرض صفحات الدليل.</td><td><code>man 5 passwd</code></td><td>Sections: 1 commands, 5 files, 8 admin.</td></tr>
+<tr><td><code>info</code></td><td>Documentation</td><td>Info pages</td><td>Displays GNU info pages.</td><td class="ar" dir="rtl">يعرض صفحات info.</td><td><code>info passwd</code></td><td>Alternative docs.</td></tr>
+<tr><td><code>pinfo</code></td><td>Documentation</td><td>Info browser</td><td>Text info browser.</td><td class="ar" dir="rtl">متصفح نصي للتوثيق.</td><td><code>pinfo passwd</code></td><td>May not be installed.</td></tr>
+<tr><td><code>firefox</code></td><td>Documentation</td><td>Local docs</td><td>Opens local documentation folder.</td><td class="ar" dir="rtl">يفتح التوثيق المحلي.</td><td><code>firefox /usr/share/doc/</code></td><td>GUI browser.</td></tr>
+<tr><td><code>redhat-support-tool</code></td><td>Documentation</td><td>Red Hat Knowledgebase</td><td>Searches Red Hat support resources.</td><td class="ar" dir="rtl">يبحث في دعم Red Hat.</td><td><code>redhat-support-tool</code></td><td>Requires valid registration.</td></tr>
+<tr class="group"><td colspan="7">Documentation search</td></tr>
+<tr><td><code>apropos</code></td><td>Documentation search</td><td>Manual pages</td><td>Searches man page descriptions.</td><td class="ar" dir="rtl">يبحث في وصف صفحات man.</td><td><code>apropos &quot;print files&quot;</code></td><td>Similar to man -k.</td></tr>
+<tr class="group"><td colspan="7">Processes</td></tr>
+<tr><td><code>ps</code></td><td>Processes</td><td>Listing processes</td><td>Lists running processes.</td><td class="ar" dir="rtl">يعرض العمليات.</td><td><code>ps aux ; ps -ef</code></td><td>aux: all/user/other; -ef: full format.</td></tr>
+<tr><td><code>pstree</code></td><td>Processes</td><td>Process hierarchy</td><td>Shows process tree.</td><td class="ar" dir="rtl">يعرض شجرة العمليات.</td><td><code>pstree -p</code></td><td>-p shows PID.</td></tr>
+<tr><td><code>pidof</code></td><td>Processes</td><td>Find PID</td><td>Finds PID by program name.</td><td class="ar" dir="rtl">يعثر على PID من اسم البرنامج.</td><td><code>pidof vim</code></td><td>Alternative: pgrep.</td></tr>
+<tr><td><code>pgrep</code></td><td>Processes</td><td>Find process</td><td>Searches processes by name/pattern.</td><td class="ar" dir="rtl">يبحث عن عمليات بالاسم.</td><td><code>pgrep -x bash</code></td><td>Used in monitor script.</td></tr>
+<tr><td><code>lsof</code></td><td>Processes/files</td><td>Open files</td><td>Lists open files and accessing processes.</td><td class="ar" dir="rtl">يعرض الملفات المفتوحة والعمليات التي تستخدمها.</td><td><code>lsof</code></td><td>Appears in final MCQ.</td></tr>
+<tr class="group"><td colspan="7">Jobs</td></tr>
+<tr><td><code>jobs</code></td><td>Jobs</td><td>Background jobs</td><td>Lists current shell jobs.</td><td class="ar" dir="rtl">يعرض وظائف الخلفية.</td><td><code>jobs</code></td><td>Works per current shell.</td></tr>
+<tr><td><code>fg</code></td><td>Jobs</td><td>Foreground</td><td>Brings job to foreground.</td><td class="ar" dir="rtl">يعيد job إلى الواجهة.</td><td><code>fg %1</code></td><td>Terminal becomes occupied.</td></tr>
+<tr><td><code>bg</code></td><td>Jobs</td><td>Background</td><td>Continues stopped job in background.</td><td class="ar" dir="rtl">يشغل job متوقف في الخلفية.</td><td><code>bg %1</code></td><td>Used after Ctrl+z.</td></tr>
+<tr class="group"><td colspan="7">Signals</td></tr>
+<tr><td><code>kill</code></td><td>Signals</td><td>Kill/send signal</td><td>Sends signals to PID/job.</td><td class="ar" dir="rtl">يرسل إشارات إلى عملية.</td><td><code>kill -9 7073</code></td><td>SIGKILL should be used with caution.</td></tr>
+<tr><td><code>pkill</code></td><td>Signals</td><td>Kill by name/user</td><td>Kills matching processes.</td><td class="ar" dir="rtl">ينهي عمليات مطابقة.</td><td><code>pkill -u &quot;$user&quot;</code></td><td>Destructive if user/pattern is wrong.</td></tr>
+<tr><td><code>killall</code></td><td>Signals</td><td>Kill by name</td><td>Kills processes by name.</td><td class="ar" dir="rtl">ينهي عمليات حسب الاسم.</td><td><code>killall vim</code></td><td>Verify target first.</td></tr>
+<tr class="group"><td colspan="7">Priority</td></tr>
+<tr><td><code>nice</code></td><td>Priority</td><td>Start process priority</td><td>Starts command with niceness.</td><td class="ar" dir="rtl">يشغل أمرًا بأولوية nice.</td><td><code>nice -n 15 vim text &amp;</code></td><td>Negative values only for root.</td></tr>
+<tr><td><code>renice</code></td><td>Priority</td><td>Change priority</td><td>Changes priority of running process.</td><td class="ar" dir="rtl">يغير أولوية عملية تعمل.</td><td><code>renice 19 9182</code></td><td>Higher nice means lower priority.</td></tr>
+<tr class="group"><td colspan="7">Monitoring</td></tr>
+<tr><td><code>top</code></td><td>Monitoring</td><td>Real-time process monitor</td><td>Shows real-time CPU/memory process info.</td><td class="ar" dir="rtl">يعرض العمليات والموارد لحظيًا.</td><td><code>top</code></td><td>q quit, M memory, P CPU, k kill, r renice.</td></tr>
+<tr><td><code>uptime</code></td><td>Monitoring</td><td>System load</td><td>Shows uptime, users, load average.</td><td class="ar" dir="rtl">يعرض مدة التشغيل والتحميل.</td><td><code>uptime</code></td><td>Used in process monitoring.</td></tr>
+<tr><td><code>free</code></td><td>Monitoring</td><td>Memory</td><td>Shows memory usage.</td><td class="ar" dir="rtl">يعرض استخدام الذاكرة.</td><td><code>free -h</code></td><td>Human-readable with -h.</td></tr>
+<tr class="group"><td colspan="7">System info</td></tr>
+<tr><td><code>uname</code></td><td>System info</td><td>Output questions</td><td>Shows system information.</td><td class="ar" dir="rtl">يعرض معلومات النظام.</td><td><code>uname -m</code></td><td>-m prints machine hardware architecture.</td></tr>
+<tr class="group"><td colspan="7">Boot logs</td></tr>
+<tr><td><code>dmesg</code></td><td>Boot logs</td><td>Boot messages</td><td>Shows kernel boot messages.</td><td class="ar" dir="rtl">يعرض رسائل النواة أثناء الإقلاع.</td><td><code>dmesg</code></td><td>Useful for hardware/boot troubleshooting.</td></tr>
+<tr class="group"><td colspan="7">Runlevels</td></tr>
+<tr><td><code>runlevel</code></td><td>Runlevels</td><td>Boot state</td><td>Shows previous/current runlevel.</td><td class="ar" dir="rtl">يعرض مستوى التشغيل الحالي والسابق.</td><td><code>runlevel</code></td><td>Systemd maps to targets.</td></tr>
+<tr class="group"><td colspan="7">Services</td></tr>
+<tr><td><code>systemctl</code></td><td>Services</td><td>Systemd services</td><td>Controls systemd services.</td><td class="ar" dir="rtl">يدير خدمات systemd.</td><td><code>systemctl restart sshd</code></td><td>May require root/sudo.</td></tr>
+<tr><td><code>service</code></td><td>Services</td><td>Legacy services</td><td>Controls legacy services.</td><td class="ar" dir="rtl">يدير الخدمات بالطريقة القديمة.</td><td><code>service httpd start</code></td><td>Systemd systems prefer systemctl.</td></tr>
+<tr class="group"><td colspan="7">System control</td></tr>
+<tr><td><code>shutdown</code></td><td>System control</td><td>Shutdown/reboot</td><td>Powers off or reboots system.</td><td class="ar" dir="rtl">يغلق أو يعيد تشغيل النظام.</td><td><code>shutdown -r now</code></td><td>Needs privilege.</td></tr>
+<tr class="group"><td colspan="7">Archive</td></tr>
+<tr><td><code>tar</code></td><td>Archive</td><td>Backup/archive</td><td>Creates/extracts archive; can compress.</td><td class="ar" dir="rtl">ينشئ أو يفك أرشيفًا.</td><td><code>tar -czf backup.tar.gz dir ; tar -xJvf project.tar.xz</code></td><td>-c create, -x extract, -t list, -z gzip, -J xz, -v verbose, -f filename.</td></tr>
+<tr class="group"><td colspan="7">Compression</td></tr>
+<tr><td><code>gzip</code></td><td>Compression</td><td>Compression</td><td>Compresses files to .gz.</td><td class="ar" dir="rtl">يضغط إلى .gz.</td><td><code>gzip -c file &gt; file.gz</code></td><td>-c does not replace original.</td></tr>
+<tr><td><code>gunzip</code></td><td>Compression</td><td>Decompression</td><td>Decompresses .gz files.</td><td class="ar" dir="rtl">يفك ضغط .gz.</td><td><code>gunzip file.gz</code></td><td>Reverse of gzip.</td></tr>
+<tr><td><code>bzip2</code></td><td>Compression</td><td>Compression</td><td>Compresses with bzip2.</td><td class="ar" dir="rtl">يضغط باستخدام bzip2.</td><td><code>bzip2 file</code></td><td>Often better compression than gzip.</td></tr>
+<tr><td><code>bunzip2</code></td><td>Compression</td><td>Decompression</td><td>Decompresses .bz2 files.</td><td class="ar" dir="rtl">يفك ضغط .bz2.</td><td><code>bunzip2 file.bz2</code></td><td>Reverse of bzip2.</td></tr>
+<tr><td><code>xz</code></td><td>Compression</td><td>Compression</td><td>High compression.</td><td class="ar" dir="rtl">ضغط عالي.</td><td><code>xz file</code></td><td>Used with tar -J.</td></tr>
+<tr><td><code>unxz</code></td><td>Compression</td><td>Decompression</td><td>Decompresses .xz files.</td><td class="ar" dir="rtl">يفك ضغط .xz.</td><td><code>unxz file.xz</code></td><td>Reverse of xz.</td></tr>
+<tr><td><code>zip</code></td><td>Compression</td><td>ZIP archive</td><td>Creates zip archive.</td><td class="ar" dir="rtl">ينشئ أرشيف zip.</td><td><code>zip backup.zip file</code></td><td>Windows-compatible format.</td></tr>
+<tr><td><code>unzip</code></td><td>Compression</td><td>Extract ZIP</td><td>Extracts zip archive.</td><td class="ar" dir="rtl">يفك أرشيف zip.</td><td><code>unzip backup.zip</code></td><td>Use for .zip files.</td></tr>
+<tr class="group"><td colspan="7">Backup</td></tr>
+<tr><td><code>rsync</code></td><td>Backup</td><td>Backup/sync</td><td>Synchronizes changed files.</td><td class="ar" dir="rtl">يزامن الملفات المتغيرة.</td><td><code>rsync -avh /source/ /destination/</code></td><td>--delete removes destination extras; use carefully.</td></tr>
+<tr class="group"><td colspan="7">Monitoring GUI</td></tr>
+<tr><td><code>gnome-system-monitor</code></td><td>Monitoring GUI</td><td>Process monitor</td><td>Opens graphical system monitor.</td><td class="ar" dir="rtl">يفتح مراقب النظام الرسومي.</td><td><code>gnome-system-monitor</code></td><td>GUI command.</td></tr></tbody></table></div>
+    </section>
+
+    <section id="config">
+      <h2>Configuration & Syntax Snippets / <span dir="rtl">الصيغ والإعدادات المهمة</span></h2>
+      <div class="grid">
+        <div class="card"><h3>Command syntax and chaining</h3><pre><code>$ command -option arguments
+# command -option arguments
+cmd1 ; cmd2
+cmd1 && cmd2
+cmd1 || cmd2
+command > continued command</code></pre><p><code>;</code> runs sequentially, <code>&amp;&amp;</code> runs next only on success, <code>||</code> runs next only on failure, and backslash continues a command on the next line.</p></div>
+        <div class="card ar" dir="rtl"><h3>صيغة الأمر وربط الأوامر</h3><p>الرمز <code>;</code> يشغل الأوامر بالتتابع، و <code>&amp;&amp;</code> يشغل الأمر التالي عند نجاح السابق، و <code>||</code> يشغل الأمر التالي عند فشل السابق، والشرطة العكسية تكمل الأمر في السطر التالي.</p></div>
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Redirection and pipeline</h3><pre><code>command > file        # override stdout
+command >> file       # append stdout
+command 2> errors     # redirect stderr
+command 2> /dev/null  # discard errors
+command &> file        # stdout + stderr
+command >> file 2>&1  # append both
+command | filter      # pipeline</code></pre></div>
+        <div class="card ar" dir="rtl"><h3>إعادة التوجيه والـ pipeline</h3><p><code>></code> يستبدل الخرج، <code>&gt;&gt;</code> يضيف للملف، <code>2&gt;</code> يوجه الأخطاء، <code>/dev/null</code> يتجاهل الخرج أو الأخطاء، <code>&amp;&gt;</code> يوجه stdout و stderr معًا، و <code>|</code> يرسل خرج أمر إلى أمر آخر.</p></div>
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Account file formats</h3><pre><code>/etc/passwd:
+username:password:UID:GID:GECOS:/home/dir:shell
+
+/etc/group:
+groupname:password:GID:list,of,users,in,this,group
+
+/etc/shadow fields:
+username:encrypted-password:last-change:min-age:max-age:warning:inactive:expire:unused</code></pre></div>
+        <div class="card ar" dir="rtl"><h3>صيغ ملفات الحسابات</h3><p>ملف <code>/etc/passwd</code> يحتوي بيانات المستخدم الأساسية، و <code>/etc/group</code> يحتوي بيانات المجموعات، و <code>/etc/shadow</code> يحتوي كلمة المرور المشفرة وسياسات العمر والانتهاء.</p></div>
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Bash tests and operators</h3><pre><code>Numeric: -eq -ne -gt -lt -ge -le
+String: = != -z -n
+File: -e -f -d -r -w -x -L -b -c
+Boolean: && || !
+Regex: [[ "$x" =~ ^[A-Z]+$ ]]
+Required arg: ${var:?message}
+Default value: ${var:-default}</code></pre></div>
+        <div class="card ar" dir="rtl"><h3>اختبارات ومعاملات Bash</h3><p>المعاملات الرقمية للمقارنات، النصية لفحص النصوص، معاملات الملفات لفحص النوع والصلاحيات، والمعاملات المنطقية لربط الشروط. صيغة <code>${var:?message}</code> تطلب قيمة ضرورية، وصيغة <code>${var:-default}</code> تعطي قيمة افتراضية.</p></div>
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Shebang examples</h3><pre><code>#!/bin/bash
+#!/usr/bin/env bash
+#!/bin/sh
+#!/bin/zsh
+#!/bin/ksh
+#!/bin/csh
+#!/usr/bin/env python3
+#!/usr/bin/env perl</code></pre><p>Only Bash scripts are labeled Bash programs in this sheet. Python/Perl shebangs are interpreter examples, not Bash.</p></div>
+        <div class="card ar" dir="rtl"><h3>أمثلة shebang</h3><p>في هذا الملف لا نطلق اسم Bash program إلا على سكربتات Bash فعلًا. أمثلة Python و Perl هي أمثلة مفسرات وليست Bash.</p></div>
+      </div>
+    </section>
+
+    <section id="scripts">
+      <h2>Bash Programs / Shell Scripts Section / <span dir="rtl">قسم سكربتات Bash والشل</span></h2>
+      <div class="note"><p><strong>Classification:</strong> The following are actual Bash scripts from labs, practical tasks, or final revision answers. Single commands such as <code>chmod +x main.sh</code>, <code>./main.sh</code>, <code>tar -xJvf</code>, and <code>read -s -p</code> are commands or snippets, not full Bash programs unless placed inside a script.</p><p class="ar" dir="rtl"><strong>التصنيف:</strong> العناصر التالية سكربتات Bash فعلية من اللابات أو المهام أو إجابات المراجعة النهائية. الأوامر المفردة مثل <code>chmod +x main.sh</code> و <code>./main.sh</code> و <code>tar -xJvf</code> و <code>read -s -p</code> هي أوامر أو snippets وليست برامج Bash كاملة إلا إذا وضعت داخل سكربت.</p></div>
+      
+        <details class="script-card">
+          <summary>1. Lab 5 — hello world Bash script <span class="ar-inline" dir="rtl">/ لاب 5 — سكربت hello world</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/usr/bin/env bash
+echo &quot;hello world&quot;</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Line 1 selects Bash as the interpreter.</li><li>Line 2 prints hello world to the terminal.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>السطر 1 يحدد Bash كمفسر للسكربت.</li><li>السطر 2 يطبع hello world في الطرفية.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: hello world.</p>
+              <p><strong>Used for:</strong> First Bash scripting practice.</p>
+              <p><strong>Security / usage notes:</strong> Run using bash main.sh or chmod +x main.sh then ./main.sh.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>2. Lab 5 — fixed variables: name, ID, age <span class="ar-inline" dir="rtl">/ لاب 5 — متغيرات ثابتة: الاسم والـ ID والعمر</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>name=&quot;tamer sokkar&quot;
+ID=2024
+age=20
+
+echo &quot;my name is $name&quot;
+echo &quot;ID = $ID&quot;
+echo &quot;I am $age years old&quot;</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Assign name, ID, and age values with no spaces around =.</li><li>Use $name, $ID, and $age to print stored values.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يتم تخزين قيم name و ID و age بدون مسافات حول علامة =.</li><li>يتم استخدام $name و $ID و $age لطباعة القيم المخزنة.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: three lines showing values.</p>
+              <p><strong>Used for:</strong> Practice variables and echo.</p>
+              <p><strong>Security / usage notes:</strong> Variable names are case-sensitive.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>3. Lab 5 — read name, ID, and age from user <span class="ar-inline" dir="rtl">/ لاب 5 — قراءة الاسم والـ ID والعمر من المستخدم</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;Enter your name&quot;
+read name
+
+echo &quot;Enter your ID&quot;
+read ID
+
+echo &quot;Enter your age&quot;
+read age
+
+echo &quot;my name is $name&quot;
+echo &quot;ID = $ID&quot;
+echo &quot;I am $age years old&quot;</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>echo asks for each value.</li><li>read stores user input in variables.</li><li>Final echo commands display the entered data.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>أوامر echo تطلب كل قيمة من المستخدم.</li><li>أوامر read تخزن الإدخال داخل المتغيرات.</li><li>أوامر echo الأخيرة تعرض البيانات المدخلة.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: name, ID, age. Output: entered values.</p>
+              <p><strong>Used for:</strong> Practice interactive scripts.</p>
+              <p><strong>Security / usage notes:</strong> Validate numeric fields in real scripts.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>4. Lab 6 — arithmetic operations on two numbers <span class="ar-inline" dir="rtl">/ لاب 6 — العمليات الحسابية على رقمين</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter two numbers&quot;
+read x y
+
+echo $(($x + $y))
+echo $(($x - $y))
+echo $(($x * $y))
+echo $(($x / $y))
+echo $(($x % $y))</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Prompt and read two numbers into x and y.</li><li>Print addition, subtraction, multiplication, division, and modulus using arithmetic expansion.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يطلب رقمين ويقرأهما داخل x و y.</li><li>يطبع الجمع والطرح والضرب والقسمة وباقي القسمة باستخدام arithmetic expansion.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: two numbers. Output: five arithmetic results.</p>
+              <p><strong>Used for:</strong> Practice $(( )) arithmetic.</p>
+              <p><strong>Security / usage notes:</strong> Do not divide by zero.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>5. Lab 6 — arithmetic using expr <span class="ar-inline" dir="rtl">/ لاب 6 — العمليات الحسابية باستخدام expr</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter two numbers&quot;
+read x y
+
+echo `expr $x + $y`
+echo `expr $x - $y`
+echo `expr $x \* $y`
+echo `expr $x / $y`
+echo `expr $x % $y`</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read two numbers.</li><li>Use expr to evaluate each operation.</li><li>Multiplication is escaped as \* so the shell does not treat * as a glob.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ رقمين.</li><li>يستخدم expr لتنفيذ كل عملية.</li><li>علامة الضرب تكتب \* حتى لا يفسرها الشل كـ wildcard.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: two numbers. Output: arithmetic results.</p>
+              <p><strong>Used for:</strong> Alternative arithmetic method shown in Lab 6.</p>
+              <p><strong>Security / usage notes:</strong> Backticks are old command substitution style; $( ) is usually clearer.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>6. Lab 6 — subtract 5 and add 3 <span class="ar-inline" dir="rtl">/ لاب 6 — طرح 5 وإضافة 3</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter two numbers&quot;
+read x y
+
+((x -= 5))
+((y += 3))
+
+echo &quot;x = &quot; $x
+echo &quot;y = &quot; $y</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read x and y.</li><li>Subtract 5 from x and add 3 to y.</li><li>Print updated values.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ x و y.</li><li>يطرح 5 من x ويضيف 3 إلى y.</li><li>يطبع القيم بعد التعديل.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: two numbers. Output: modified x and y.</p>
+              <p><strong>Used for:</strong> Practice arithmetic assignment.</p>
+              <p><strong>Security / usage notes:</strong> Only valid for numeric input.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>7. Lab 6 — compare number with 5 <span class="ar-inline" dir="rtl">/ لاب 6 — مقارنة رقم بالعدد 5</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter a number&quot;
+read num
+
+if [ $num -gt 5 ]
+then
+    echo &quot;the number is greater than 5&quot;
+elif [ $num -lt 5 ]
+then
+    echo &quot;the number is less than 5&quot;
+else
+    echo &quot;the number is = 5&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read a number.</li><li>Use -gt, -lt, and else to classify the number relative to 5.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ رقمًا.</li><li>يستخدم -gt و -lt و else لتحديد علاقة الرقم بالعدد 5.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: one number. Output: greater/less/equal message.</p>
+              <p><strong>Used for:</strong> Practice numeric comparison.</p>
+              <p><strong>Security / usage notes:</strong> Quote variables in robust scripts: [ &quot;$num&quot; -gt 5 ].</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>8. Lab 6 — absolute value <span class="ar-inline" dir="rtl">/ لاب 6 — حساب القيمة المطلقة</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter any number&quot;
+read num
+
+if [ $num -le 0 ]
+then
+    echo &quot;the absolute value = &quot; $((num * -1))
+else
+    echo &quot;the absolute value = &quot; $num
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read a number.</li><li>If it is less than or equal to zero, multiply by -1.</li><li>Otherwise print it as it is.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ رقمًا.</li><li>إذا كان أقل من أو يساوي صفر يتم ضربه في -1.</li><li>وإلا يطبع الرقم كما هو.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: one number. Output: absolute value.</p>
+              <p><strong>Used for:</strong> Practice if and arithmetic.</p>
+              <p><strong>Security / usage notes:</strong> For zero, the result remains zero.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>9. Lab 7 — adult or minor <span class="ar-inline" dir="rtl">/ لاب 7 — بالغ أم قاصر</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter your age:&quot;
+read age
+
+if [ $age -ge 18 ]
+then
+    echo &quot;you are an adult&quot;
+else
+    echo &quot;you are a minor&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read age.</li><li>If age is greater than or equal to 18, print adult.</li><li>Otherwise print minor.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ العمر.</li><li>إذا كان العمر أكبر من أو يساوي 18 يطبع adult.</li><li>غير ذلك يطبع minor.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: age. Output: adult/minor message.</p>
+              <p><strong>Used for:</strong> Practice if-else.</p>
+              <p><strong>Security / usage notes:</strong> Validate that age is numeric.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>10. Lab 7 — larger of two numbers <span class="ar-inline" dir="rtl">/ لاب 7 — أكبر رقم من رقمين</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;Enter the first number:&quot;
+read x
+echo &quot;Enter the second number:&quot;
+read y
+
+if [ $x -gt $y ]
+then
+    echo &quot;The larger number is: &quot; $x
+elif [ $x -lt $y ]
+then
+    echo &quot;The larger number is: &quot; $y
+else
+    echo &quot;Both numbers are equal&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read x and y.</li><li>Compare using -gt and -lt.</li><li>Print the larger value or equality message.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ x و y.</li><li>يقارن باستخدام -gt و -lt.</li><li>يطبع الأكبر أو رسالة التساوي.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: two numbers. Output: larger/equal message.</p>
+              <p><strong>Used for:</strong> Practice elif.</p>
+              <p><strong>Security / usage notes:</strong> Numeric comparison only.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>11. Lab 7 — temperature classification <span class="ar-inline" dir="rtl">/ لاب 7 — تصنيف درجة الحرارة</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter the temperature:&quot;
+read temp
+
+if [ $temp -lt 15 ]
+then
+    echo &quot;cold&quot;
+elif [ $temp -ge 15 ] &amp;&amp; [ $temp -le 30 ]
+then
+    echo &quot;mild&quot;
+else
+    echo &quot;hot&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read temperature.</li><li>Less than 15 is cold.</li><li>Between 15 and 30 inclusive is mild.</li><li>Greater than 30 is hot.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ درجة الحرارة.</li><li>أقل من 15 = cold.</li><li>من 15 إلى 30 شاملًا = mild.</li><li>أكبر من 30 = hot.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: temperature. Output: cold/mild/hot.</p>
+              <p><strong>Used for:</strong> Practice compound conditions with &amp;&amp;.</p>
+              <p><strong>Security / usage notes:</strong> Spacing inside [ ] is required.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>12. Lab 7 — largest of three numbers <span class="ar-inline" dir="rtl">/ لاب 7 — أكبر رقم من ثلاثة أرقام</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;Enter three numbers&quot;
+read num1 num2 num3
+
+if [ $num1 -ge $num2 ] &amp;&amp; [ $num1 -ge $num3 ]
+then
+    echo &quot;the largest number is: &quot; $num1
+elif [ $num2 -ge $num1 ] &amp;&amp; [ $num2 -ge $num3 ]
+then
+    echo &quot;the largest number is: &quot; $num2
+else
+    echo &quot;the largest number is: &quot; $num3
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read three numbers.</li><li>Check whether num1 is greatest, then num2, otherwise num3.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ ثلاثة أرقام.</li><li>يفحص هل num1 هو الأكبر، ثم num2، وإلا يكون num3.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: three numbers. Output: largest number.</p>
+              <p><strong>Used for:</strong> Practice multiple conditions.</p>
+              <p><strong>Security / usage notes:</strong> -ge handles equal values.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>13. Lab 7 — positive, negative, or zero <span class="ar-inline" dir="rtl">/ لاب 7 — موجب أو سالب أو صفر</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter a number:&quot;
+read num
+
+if [ $num -gt 0 ]
+then
+    echo &quot;the number is positive&quot;
+elif [ $num -lt 0 ]
+then
+    echo &quot;the number is negative&quot;
+else
+    echo &quot;the number is zero&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read a number.</li><li>Use -gt 0 and -lt 0 to classify sign.</li><li>else handles zero.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ رقمًا.</li><li>يستخدم -gt 0 و -lt 0 لتحديد الإشارة.</li><li>else تعني أن الرقم صفر.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: number. Output: positive/negative/zero.</p>
+              <p><strong>Used for:</strong> Practice elif branching.</p>
+              <p><strong>Security / usage notes:</strong> Numeric input required.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>14. Lab 7 — even or odd <span class="ar-inline" dir="rtl">/ لاب 7 — زوجي أم فردي</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;enter a number&quot;
+read x
+
+if [ $((x % 2)) -eq 0 ]
+then
+    echo &quot;the number is even&quot;
+else
+    echo &quot;the number is odd&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read number x.</li><li>Use modulus by 2.</li><li>If remainder equals 0, number is even; otherwise odd.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ الرقم x.</li><li>يستخدم باقي القسمة على 2.</li><li>إذا كان الباقي 0 فالرقم زوجي، وإلا فردي.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: number. Output: even/odd.</p>
+              <p><strong>Used for:</strong> Practice modulus and if.</p>
+              <p><strong>Security / usage notes:</strong> Alternative syntax in the lab uses ((x % 2 == 0)).</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>15. Lab 8 — print 1 to 20 using for loop <span class="ar-inline" dir="rtl">/ لاب 8 — طباعة 1 إلى 20 باستخدام for</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>for i in {1..20}
+do
+    echo $i
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Loop over numbers 1 through 20.</li><li>Print each value.</li><li>done closes the loop.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يدور على الأرقام من 1 إلى 20.</li><li>يطبع كل قيمة.</li><li>done تغلق الحلقة.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: numbers 1..20.</p>
+              <p><strong>Used for:</strong> Practice brace expansion with for.</p>
+              <p><strong>Security / usage notes:</strong> Alternative: for ((i=1; i&lt;=20; i++)).</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>16. Lab 8 — print words from text variable <span class="ar-inline" dir="rtl">/ لاب 8 — طباعة كلمات متغير نصي</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>text=&quot;sinai university 2024&quot;
+
+for i in $text
+do
+    echo $i
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Assign a string to text.</li><li>The for loop splits it into words.</li><li>Each word is printed on a new line.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يخزن نصًا داخل text.</li><li>حلقة for تقسمه إلى كلمات.</li><li>تطبع كل كلمة في سطر جديد.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: each word separately.</p>
+              <p><strong>Used for:</strong> Practice for loop over words.</p>
+              <p><strong>Security / usage notes:</strong> Unquoted $text intentionally performs word splitting here.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>17. Lab 8 — sum 1 to 20 using for loop <span class="ar-inline" dir="rtl">/ لاب 8 — مجموع 1 إلى 20 باستخدام for</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>sum=0
+
+for i in {1..20}
+do
+    sum=$(($sum + $i))
+done
+
+echo &quot;the sum is: &quot; $sum</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Initialize sum to zero.</li><li>Add each value from 1 to 20.</li><li>Print final sum.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يبدأ sum بقيمة صفر.</li><li>يضيف كل رقم من 1 إلى 20.</li><li>يطبع المجموع النهائي.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: sum value.</p>
+              <p><strong>Used for:</strong> Practice accumulators.</p>
+              <p><strong>Security / usage notes:</strong> Expected sum is 210.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>18. Lab 8 — even numbers using for loop <span class="ar-inline" dir="rtl">/ لاب 8 — الأرقام الزوجية باستخدام for</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>for i in {0..20}
+do
+    if ((i % 2 == 0))
+    then
+        echo $i
+    fi
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Loop over 0..20.</li><li>Use modulo to test even numbers.</li><li>Print only even values.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يدور من 0 إلى 20.</li><li>يستخدم باقي القسمة لاختبار الزوجي.</li><li>يطبع الأرقام الزوجية فقط.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: even numbers 0..20.</p>
+              <p><strong>Used for:</strong> Practice loop with if.</p>
+              <p><strong>Security / usage notes:</strong> Alternative: for ((i=0; i&lt;=20; i+=2)).</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>19. Lab 8 — list current directory entries <span class="ar-inline" dir="rtl">/ لاب 8 — عرض عناصر المجلد الحالي</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>for i in *
+do
+    echo $i
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>* expands to files/directories in current directory.</li><li>Loop prints each name.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>الرمز * يتمدد لأسماء الملفات والمجلدات في المجلد الحالي.</li><li>الحلقة تطبع كل اسم.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: current directory entries.</p>
+              <p><strong>Used for:</strong> Practice globbing in loops.</p>
+              <p><strong>Security / usage notes:</strong> Hidden files are not included by * normally.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>20. Lab 8 — list entries starting with D <span class="ar-inline" dir="rtl">/ لاب 8 — عرض العناصر التي تبدأ بالحرف D</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>for i in D*
+do
+    echo $i
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>D* matches names starting with D.</li><li>The loop prints each matched name.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>النمط D* يطابق الأسماء التي تبدأ بـ D.</li><li>الحلقة تطبع كل اسم مطابق.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: names starting with D.</p>
+              <p><strong>Used for:</strong> Practice pattern matching.</p>
+              <p><strong>Security / usage notes:</strong> If no match, behavior depends on shell settings.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>21. Lab 9 — print 1 to 20 using while loop <span class="ar-inline" dir="rtl">/ لاب 9 — طباعة 1 إلى 20 باستخدام while</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>i=1
+while [ $i -le 20 ]
+do
+    echo $i
+    i=$((i+1))
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Initialize i to 1.</li><li>Loop while i is less than or equal 20.</li><li>Print i and increment it.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يبدأ i بقيمة 1.</li><li>يكرر طالما i أقل من أو يساوي 20.</li><li>يطبع i ثم يزيده.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: 1..20.</p>
+              <p><strong>Used for:</strong> Practice while loop and counter.</p>
+              <p><strong>Security / usage notes:</strong> Forgetting increment causes infinite loop.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>22. Lab 9 — sum 1 to 20 using while loop <span class="ar-inline" dir="rtl">/ لاب 9 — مجموع 1 إلى 20 باستخدام while</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>total=0
+i=1
+while [ $i -le 20 ]
+do
+    total=$(($total + $i))
+    ((i++))
+done
+echo &quot;the sum =&quot; $total</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Initialize total and counter.</li><li>Add i to total each loop.</li><li>Increment i and print final total.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يبدأ total والعداد.</li><li>يضيف i إلى total في كل دورة.</li><li>يزيد i ثم يطبع المجموع النهائي.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: sum value.</p>
+              <p><strong>Used for:</strong> Practice while accumulator.</p>
+              <p><strong>Security / usage notes:</strong> Expected sum is 210.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>23. Lab 9 — even numbers using while loop <span class="ar-inline" dir="rtl">/ لاب 9 — الأرقام الزوجية باستخدام while</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>i=0
+while [ $i -le 20 ]
+do
+    if ((i % 2 == 0))
+    then
+        echo $i
+    fi
+    ((i++))
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Loop from 0 to 20.</li><li>Use modulo test.</li><li>Print even values then increment.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يدور من 0 إلى 20.</li><li>يستخدم اختبار باقي القسمة.</li><li>يطبع القيم الزوجية ثم يزيد العداد.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> No input. Output: even numbers.</p>
+              <p><strong>Used for:</strong> Practice while + if.</p>
+              <p><strong>Security / usage notes:</strong> Alternative increments by 2.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>24. Lab 9 — keep adding until user enters s <span class="ar-inline" dir="rtl">/ لاب 9 — جمع الأرقام حتى يدخل المستخدم s</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>total=0
+while [ 0 ]
+do
+    echo &quot;please enter a number&quot;
+    read num
+    if [ $num == s ]
+    then
+        break
+    fi
+    total=$(($total + $num))
+done
+echo &quot;total =&quot; $total</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Start total at 0.</li><li>Loop repeatedly asking for numbers.</li><li>If input is s, break exits the loop.</li><li>Otherwise add input to total and print final total.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يبدأ total بصفر.</li><li>يكرر طلب الأرقام من المستخدم.</li><li>إذا كان الإدخال s يستخدم break للخروج.</li><li>غير ذلك يضيف الرقم إلى total ثم يطبع المجموع في النهاية.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: numbers then s. Output: total.</p>
+              <p><strong>Used for:</strong> Practice break and continuous input.</p>
+              <p><strong>Security / usage notes:</strong> Validate input before arithmetic in real scripts.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>25. Lab 9 — print even numbers up to user number using continue <span class="ar-inline" dir="rtl">/ لاب 9 — طباعة الزوجي حتى رقم المستخدم باستخدام continue</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>echo &quot;please enter a number&quot;
+read num
+i=0
+while [ $i -le $num ]
+do
+    ((i++))
+    if ((i % 2 != 0))
+    then
+        continue
+    fi
+    echo $i
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read maximum number.</li><li>Loop while i is within the limit.</li><li>Skip odd numbers using continue.</li><li>Print even numbers.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ الحد الأعلى من المستخدم.</li><li>يدور طالما i داخل الحد.</li><li>يتخطى الأرقام الفردية باستخدام continue.</li><li>يطبع الأرقام الزوجية.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: max number. Output: even numbers.</p>
+              <p><strong>Used for:</strong> Practice continue statement.</p>
+              <p><strong>Security / usage notes:</strong> The lab states from 2 up to the number; the loop increments before testing.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>26. Session 2 Bonus — log backup and line count <span class="ar-inline" dir="rtl">/ بونص سيشن 2 — نسخ ملفات اللوج وعدّ السطور</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/bin/bash
+# Define the backup directory
+BACKUP_DIR=&quot;/tmp/log_backup&quot;
+# Create the backup directory if it does not exist
+mkdir -p &quot;$BACKUP_DIR&quot;
+# Copy all logs from /var/log/ to /tmp/log_backup/
+cp -r /var/log/* &quot;$BACKUP_DIR&quot;
+# Display the number of lines in each log file
+echo &quot;Line count for each log file in $BACKUP_DIR:&quot;
+for file in &quot;$BACKUP_DIR&quot;/*; do
+    if [ -f &quot;$file&quot; ]; then
+        echo &quot;$(wc -l &lt; &quot;$file&quot;) lines - $file&quot;
+    fi
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Set BACKUP_DIR to /tmp/log_backup.</li><li>Create directory if missing.</li><li>Copy logs recursively from /var/log.</li><li>Loop over copied items.</li><li>If item is a regular file, print its line count.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يحدد BACKUP_DIR إلى /tmp/log_backup.</li><li>ينشئ المجلد إذا لم يكن موجودًا.</li><li>ينسخ ملفات اللوج من /var/log بشكل recursive.</li><li>يدور على العناصر المنسوخة.</li><li>إذا كان العنصر ملفًا عاديًا يطبع عدد سطوره.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: none. Output: backup directory and line counts.</p>
+              <p><strong>Used for:</strong> Practical backup challenge.</p>
+              <p><strong>Security / usage notes:</strong> Reading /var/log may need root/sudo for some files.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>27. Final Revision A1 — top 10 memory processes and kill user <span class="ar-inline" dir="rtl">/ المراجعة النهائية A1 — أعلى 10 عمليات في الذاكرة وقتل عمليات مستخدم</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/bin/bash
+echo &quot;Top 10 memory-consuming processes:&quot;
+echo &quot;-----------------------------------&quot;
+ps -eo pid,ppid,%mem,comm --sort=-%mem | head -11
+read -p &quot;Enter username to kill all their processes: &quot; user
+if id &quot;$user&quot; &amp;&gt;/dev/null; then
+    pkill -u &quot;$user&quot;
+    echo &quot;All processes of user &#x27;$user&#x27; have been killed.&quot;
+else
+    echo &quot;Error: User &#x27;$user&#x27; does not exist.&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Print headings.</li><li>Use ps with selected columns and sort by memory descending, then head -11 for header plus top 10.</li><li>Read username.</li><li>Check the user exists using id.</li><li>Kill that user’s processes using pkill -u or print an error.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يطبع عنوانًا.</li><li>يستخدم ps بأعمدة محددة ويرتب حسب الذاكرة تنازليًا ثم head -11 لعرض العنوان وأعلى 10.</li><li>يقرأ اسم المستخدم.</li><li>يتأكد من وجود المستخدم باستخدام id.</li><li>ينهي عمليات المستخدم باستخدام pkill -u أو يطبع خطأ.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: username. Output: process list and kill/error message.</p>
+              <p><strong>Used for:</strong> Exam script for processes and users.</p>
+              <p><strong>Security / usage notes:</strong> Dangerous: pkill -u can terminate important sessions/services.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>28. Final Revision A2 — backup directory script <span class="ar-inline" dir="rtl">/ المراجعة النهائية A2 — سكربت نسخ احتياطي لمجلد</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/bin/bash
+read -p &quot;Enter source directory: &quot; src
+read -p &quot;Enter destination directory: &quot; dst
+if [ ! -d &quot;$src&quot; ]; then
+    echo &quot;Error: Source directory does not exist.&quot;
+    exit 1
+fi
+mkdir -p &quot;$dst&quot;
+timestamp=$(date +%Y%m%d_%H%M%S)
+backup_file=&quot;$dst/backup_$timestamp.tar.gz&quot;
+tar -czf &quot;$backup_file&quot; -C &quot;$(dirname &quot;$src&quot;)&quot; &quot;$(basename &quot;$src&quot;)&quot;
+echo &quot;Backup created: $backup_file&quot;</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read source and destination directories.</li><li>Check source is a directory.</li><li>Create destination if missing.</li><li>Create timestamp.</li><li>Build backup filename.</li><li>Create gzip tar archive using tar -czf.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ مجلد المصدر والوجهة.</li><li>يتأكد أن المصدر مجلد.</li><li>ينشئ مجلد الوجهة إذا لم يكن موجودًا.</li><li>ينشئ timestamp.</li><li>يبني اسم ملف النسخة الاحتياطية.</li><li>ينشئ أرشيف gzip باستخدام tar -czf.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: source path and destination path. Output: backup_YYYYMMDD_HHMMSS.tar.gz.</p>
+              <p><strong>Used for:</strong> Backup practical question.</p>
+              <p><strong>Security / usage notes:</strong> Check available space and permissions.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>29. Final Revision A3 — search and replace pattern in file <span class="ar-inline" dir="rtl">/ المراجعة النهائية A3 — البحث والاستبدال داخل ملف</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/bin/bash
+read -p &quot;Enter filename: &quot; file
+read -p &quot;Enter pattern to search: &quot; pattern
+if [ ! -f &quot;$file&quot; ]; then
+    echo &quot;Error: File does not exist.&quot;; exit 1
+fi
+result=$(grep -n &quot;$pattern&quot; &quot;$file&quot;)
+if [ -z &quot;$result&quot; ]; then
+    echo &quot;Pattern &#x27;$pattern&#x27; did not match any line.&quot;
+else
+    echo &quot;Pattern found in the following lines:&quot;
+    echo &quot;$result&quot;
+    read -p &quot;Enter new pattern to replace: &quot; newpat
+    sed -i &quot;s/$pattern/$newpat/g&quot; &quot;$file&quot;
+    echo &quot;Replacement done.&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read filename and search pattern.</li><li>Check file exists and is regular.</li><li>Search with grep -n.</li><li>If result is empty, print no match.</li><li>Otherwise show lines, read replacement, and edit using sed -i.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ اسم الملف والنمط المطلوب.</li><li>يتأكد أن الملف موجود وعادي.</li><li>يبحث باستخدام grep -n.</li><li>إذا كانت النتيجة فارغة يطبع عدم وجود تطابق.</li><li>غير ذلك يعرض السطور، يقرأ الاستبدال، ويعدل باستخدام sed -i.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: filename, old pattern, new pattern. Output: matching lines and replacement confirmation.</p>
+              <p><strong>Used for:</strong> Exam script for grep and sed.</p>
+              <p><strong>Security / usage notes:</strong> sed -i edits the original file; backup first.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>30. Final Revision A4 — file type checker <span class="ar-inline" dir="rtl">/ المراجعة النهائية A4 — فحص نوع الملف</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/bin/bash
+read -p &quot;Enter file path: &quot; filepath
+if [ ! -e &quot;$filepath&quot; ]; then
+    echo &quot;Error: File does not exist.&quot;
+    exit 1
+fi
+if [ -L &quot;$filepath&quot; ]; then
+    echo &quot;$filepath is a symbolic link.&quot;
+elif [ -f &quot;$filepath&quot; ]; then
+    echo &quot;$filepath is a regular file.&quot;
+elif [ -d &quot;$filepath&quot; ]; then
+    echo &quot;$filepath is a directory.&quot;
+elif [ -b &quot;$filepath&quot; ] || [ -c &quot;$filepath&quot; ]; then
+    echo &quot;$filepath is a special file.&quot;
+fi</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read path.</li><li>Check existence with -e.</li><li>Test symbolic link, regular file, directory, or special file using file test operators.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ المسار.</li><li>يتأكد من الوجود باستخدام -e.</li><li>يفحص هل هو symbolic link أو regular file أو directory أو special file باستخدام file test operators.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: file path. Output: file type or error.</p>
+              <p><strong>Used for:</strong> Exam script for file tests.</p>
+              <p><strong>Security / usage notes:</strong> Order matters: test -L before -f/-d.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>31. Final Revision A5 — permission checker <span class="ar-inline" dir="rtl">/ المراجعة النهائية A5 — فحص الصلاحيات</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/bin/bash
+read -p &quot;Enter filename: &quot; file
+if [ ! -e &quot;$file&quot; ]; then
+    echo &quot;Error: File &#x27;$file&#x27; does not exist.&quot;
+    exit 1
+fi
+echo &quot;Permissions for &#x27;$file&#x27;:&quot;
+[ -r &quot;$file&quot; ] &amp;&amp; echo &quot; Read: YES&quot; || echo &quot; Read: NO&quot;
+[ -w &quot;$file&quot; ] &amp;&amp; echo &quot; Write: YES&quot; || echo &quot; Write: NO&quot;
+[ -x &quot;$file&quot; ] &amp;&amp; echo &quot; Execute: YES&quot; || echo &quot; Execute: NO&quot;</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read filename.</li><li>Check file exists.</li><li>Use -r, -w, -x to check active permissions for current user.</li><li>Use &amp;&amp; and || to print YES/NO.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ اسم الملف.</li><li>يتأكد من وجود الملف.</li><li>يستخدم -r و -w و -x لفحص صلاحيات المستخدم الحالي.</li><li>يستخدم &amp;&amp; و || لطباعة YES/NO.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: filename. Output: read/write/execute status.</p>
+              <p><strong>Used for:</strong> Exam script for permissions.</p>
+              <p><strong>Security / usage notes:</strong> This checks permissions from the current user context.</p>
+            </div>
+          </div>
+        </details>
+        
+
+        <details class="script-card">
+          <summary>32. Final Revision A6 — process status monitor <span class="ar-inline" dir="rtl">/ المراجعة النهائية A6 — مراقبة حالة عملية</span> <span class="kind">Bash script</span></summary>
+          <div class="details-body">
+            <pre><code>#!/bin/bash
+read -p &quot;Enter process name: &quot; proc
+while true; do
+    if pgrep -x &quot;$proc&quot; &gt; /dev/null; then
+        echo &quot;The process &#x27;$proc&#x27; is running.&quot;
+    else
+        echo &quot;Process not running. Restarting...&quot;
+        systemctl restart &quot;$proc&quot; 2&gt;/dev/null || $proc &amp;
+    fi
+    sleep 5
+done</code></pre>
+            <div class="two">
+              <div class="mini"><h4>Plain-English line-by-line</h4><ul><li>Read process name.</li><li>Loop forever.</li><li>Use pgrep -x for exact process name.</li><li>If running, print status.</li><li>Otherwise try systemctl restart, or run the command in background, then sleep 5 seconds.</li></ul></div>
+              <div class="mini ar" dir="rtl"><h4>شرح عربي سطر بسطر</h4><ul><li>يقرأ اسم العملية.</li><li>يدخل في حلقة مستمرة.</li><li>يستخدم pgrep -x لمطابقة اسم العملية بدقة.</li><li>إذا كانت تعمل يطبع الحالة.</li><li>إذا لم تكن تعمل يحاول systemctl restart أو يشغل الأمر في الخلفية ثم ينتظر 5 ثوانٍ.</li></ul></div>
+            </div>
+            <div class="info-grid">
+              <p><strong>Input / Output:</strong> Input: process name. Output: status every 5 seconds and restart attempts.</p>
+              <p><strong>Used for:</strong> Exam script for process monitoring.</p>
+              <p><strong>Security / usage notes:</strong> Infinite loop; stop with Ctrl+c. Restarting services may need root/sudo.</p>
+            </div>
+          </div>
+        </details>
+        
+    </section>
+
+    <section id="security">
+      <h2>Security Notes / <span dir="rtl">ملاحظات أمنية</span></h2>
+      <div class="table-wrap"><table><thead><tr><th>Security idea</th><th>English</th><th class="ar" dir="rtl">العربي</th></tr></thead><tbody>
+        <tr><td>Authentication</td><td>Covered through <code>passwd</code>, login shells, account locking/unlocking, and password-type input with <code>read -s</code>.</td><td class="ar" dir="rtl">موجودة من خلال <code>passwd</code> و login shells وقفل/فك الحساب وإدخال كلمة المرور باستخدام <code>read -s</code>.</td></tr>
+        <tr><td>Access control</td><td>Covered through users, groups, UID/GID, ownership, <code>chmod</code>, <code>chown</code>, sudo, wheel group, and r/w/x permissions.</td><td class="ar" dir="rtl">موجودة من خلال المستخدمين والمجموعات و UID/GID والملكية و <code>chmod</code> و <code>chown</code> و sudo و wheel group وصلاحيات r/w/x.</td></tr>
+        <tr><td>Root privilege</td><td>Root has UID 0 and broad control. Root can manage all users, groups, files, and processes.</td><td class="ar" dir="rtl">root له UID 0 وصلاحيات واسعة لإدارة المستخدمين والمجموعات والملفات والعمليات.</td></tr>
+        <tr><td>Password files</td><td><code>/etc/passwd</code> stores user account metadata; encrypted passwords are in <code>/etc/shadow</code>.</td><td class="ar" dir="rtl"><code>/etc/passwd</code> يخزن بيانات الحساب، وكلمات المرور المشفرة في <code>/etc/shadow</code>.</td></tr>
+        <tr><td>Process control</td><td><code>kill -9</code>, <code>pkill</code>, and <code>killall</code> can terminate important processes. Verify PID/user first.</td><td class="ar" dir="rtl">أوامر <code>kill -9</code> و <code>pkill</code> و <code>killall</code> قد تنهي عمليات مهمة. تأكد من PID أو المستخدم أولًا.</td></tr>
+        <tr><td>Backup</td><td>Backup scripts and <code>tar</code>/<code>rsync</code> help protect data from deletion, mistakes, and system failure.</td><td class="ar" dir="rtl">سكربتات النسخ الاحتياطي و <code>tar</code>/<code>rsync</code> تحمي البيانات من الحذف والأخطاء وفشل النظام.</td></tr>
+        <tr><td>Script safety</td><td>Use quotes around variables, check file existence, validate numeric input, and avoid editing originals with <code>sed -i</code> without backup.</td><td class="ar" dir="rtl">استخدم quotes حول المتغيرات، افحص وجود الملفات، تحقق من الإدخال الرقمي، ولا تستخدم <code>sed -i</code> على ملفات مهمة دون نسخة احتياطية.</td></tr>
+        <tr><td>OWASP risks</td><td>Not clearly stated in the provided course files.</td><td class="ar" dir="rtl">غير مذكورة بوضوح في ملفات المادة المتاحة.</td></tr>
+        <tr><td>SQL Injection</td><td>Not clearly stated in the provided course files.</td><td class="ar" dir="rtl">غير مذكور بوضوح في ملفات المادة المتاحة.</td></tr>
+        <tr><td>XSS</td><td>Not clearly stated in the provided course files.</td><td class="ar" dir="rtl">غير مذكور بوضوح في ملفات المادة المتاحة.</td></tr>
+        <tr><td>Broken Access Control</td><td>The web-security OWASP risk is not clearly stated. Linux access-control concepts are clearly covered.</td><td class="ar" dir="rtl">مصطلح OWASP ليس مذكورًا بوضوح، لكن مفاهيم التحكم في الوصول في لينكس موجودة بوضوح.</td></tr>
+        <tr><td>Cryptography basics</td><td>Only encrypted password storage in <code>/etc/shadow</code> is clearly present. General cryptography theory is not clearly stated.</td><td class="ar" dir="rtl">المذكور بوضوح هو تخزين كلمة المرور المشفرة في <code>/etc/shadow</code>. أما نظرية التشفير العامة فغير مذكورة بوضوح.</td></tr>
+        <tr><td>SSL / certificates</td><td>Not clearly stated in the provided course files.</td><td class="ar" dir="rtl">غير مذكورة بوضوح في ملفات المادة المتاحة.</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="final-revision" class="final">
+      <h2 style="border-top:0;margin-top:0;padding-top:0;color:#7a4b00">Final Revision + Questions / <span dir="rtl">المراجعة النهائية والأسئلة</span></h2>
+      <div class="grid"><div class="card"><h3>Final Revision Summary</h3><p>The final revision focuses on practical Bash and Linux command use. The core exam skills are: complete missing commands, predict outputs, answer command/concept MCQs, and write working scripts for process management, backup, search/replace, file type checking, permission checking, and process monitoring.</p></div><div class="card ar" dir="rtl"><h3>ملخص المراجعة النهائية</h3><p>المراجعة النهائية تركز على الاستخدام العملي لأوامر لينكس و Bash. أهم مهارات الامتحان: إكمال الأوامر الناقصة، توقع المخرجات، حل MCQ في الأوامر والمفاهيم، وكتابة سكربتات للعمليات والنسخ الاحتياطي والبحث والاستبدال وفحص نوع الملف وفحص الصلاحيات ومراقبة العمليات.</p></div></div>
+      <div class="card"><h3>Exam Format / <span dir="rtl">شكل الامتحان</span></h3><div class="grid3"><div><span class="pill">MCQ and Complete</span><br>7 Marks</div><div><span class="pill">Match</span><br>3 Marks</div><div><span class="pill">What is the Output</span><br>5 Marks</div><div><span class="pill">Write Command/Script</span><br>10 Marks</div></div></div>
+      <div class="grid"><div class="card"><h3>Must revise before exam</h3><ul><li>File management and paths.</li><li>Redirection and pipelines.</li><li>User/group management and permissions.</li><li>Bash variables, arrays, operators, conditions, loops, and functions.</li><li>Process commands, jobs, signals, and priorities.</li><li>Backup, tar, gzip/xz, inodes, hard links, and soft links.</li></ul></div><div class="card ar" dir="rtl"><h3>لازم تراجع قبل الامتحان</h3><ul><li>إدارة الملفات والمسارات.</li><li>إعادة التوجيه والـ pipelines.</li><li>إدارة المستخدمين والمجموعات والصلاحيات.</li><li>متغيرات Bash والمصفوفات والمعاملات والشروط والحلقات والدوال.</li><li>أوامر العمليات والـ jobs والإشارات والأولويات.</li><li>النسخ الاحتياطي و tar و gzip/xz و inodes و hard/soft links.</li></ul></div></div>
+      <div class="card"><h3>Section A — Write Shell Scripts / <span dir="rtl">كتابة سكربتات</span></h3><p>The complete script answers are included in the Bash Programs section: A1 Top 10 Memory Processes & Kill User, A2 Backup Directory, A3 Search & Replace, A4 File Type Checker, A5 Permission Checker, and A6 Process Status Monitor.</p><p class="ar" dir="rtl">إجابات السكربتات كاملة موجودة في قسم Bash Programs: A1 أعلى 10 عمليات في الذاكرة وقتل عمليات مستخدم، A2 نسخ احتياطي لمجلد، A3 بحث واستبدال، A4 فحص نوع الملف، A5 فحص الصلاحيات، A6 مراقبة حالة عملية.</p></div>
+      <div class="card"><h3>Section B — Complete the Missing Commands / <span dir="rtl">أكمل الأوامر الناقصة</span></h3><div class="table-wrap"><table><thead><tr><th>Question</th><th>Answer</th><th>English explanation</th><th class="ar" dir="rtl">الشرح بالعربي</th></tr></thead><tbody><tr><td>B1 Sum 1..N with until-loop</td><td>(1) until, (2) +, (3) done</td><td>until loops while the condition is false; + adds inside $(( )); done closes loop.</td><td class="ar" dir="rtl">until تعمل طالما الشرط خطأ؛ + للجمع داخل $(( ))؛ done تغلق الحلقة.</td></tr><tr><td>B2 Required arguments with parameter expansion</td><td>(1) ?, (2) ?</td><td>${var:?msg} prints the message to stderr and exits if the variable is unset or empty.</td><td class="ar" dir="rtl">${var:?msg} تطبع الرسالة في stderr وتخرج إذا كان المتغير فارغًا أو غير موجود.</td></tr><tr><td>B3 Restore xz archive</td><td>(1) x, (2) J, (3) vf</td><td>tar -xJvf project.tar.xz -C /tmp/restore extracts xz archive verbosely.</td><td class="ar" dir="rtl">الأمر tar -xJvf project.tar.xz -C /tmp/restore يفك أرشيف xz مع عرض التفاصيل.</td></tr><tr><td>B4 Hard-link audit</td><td>(1) %i, (2) inum</td><td>stat -c %i prints inode; find -inum searches by inode.</td><td class="ar" dir="rtl">stat -c %i يطبع inode؛ find -inum يبحث باستخدام inode.</td></tr></tbody></table></div></div>
+      <div class="card"><h3>Section C — Describe the Output / <span dir="rtl">صف المخرجات</span></h3><div class="table-wrap"><table><thead><tr><th>Command / Snippet</th><th>English answer</th><th class="ar" dir="rtl">الإجابة بالعربي</th></tr></thead><tbody><tr><td><code>who | wc -l</code></td><td>Number of users currently logged in.</td><td class="ar" dir="rtl">عدد المستخدمين المسجلين دخولهم حاليًا.</td></tr><tr><td><code>uname -m</code></td><td>Machine hardware architecture, such as x86_64.</td><td class="ar" dir="rtl">معمارية الجهاز مثل x86_64.</td></tr><tr><td><code>find / -type f | wc -l</code></td><td>Total number of regular files under /.</td><td class="ar" dir="rtl">إجمالي عدد الملفات العادية تحت /.</td></tr><tr><td><code>var=$( -w $filename)</code></td><td>Interpreted in revision as writable test result: true if file is writable, false otherwise.</td><td class="ar" dir="rtl">حسب المراجعة: النتيجة true إذا كان الملف قابلًا للكتابة و false إذا لم يكن كذلك.</td></tr><tr><td><code>read -s -p &quot;Enter password: &quot; password</code></td><td>Password-type input without showing typed characters.</td><td class="ar" dir="rtl">إدخال كلمة مرور بدون إظهار الأحرف المكتوبة.</td></tr></tbody></table></div></div>
+      <div class="card"><h3>Section D — Multiple Choice Questions / <span dir="rtl">أسئلة اختيار من متعدد</span></h3><div class="table-wrap"><table><thead><tr><th>Question</th><th>Correct answer</th><th>English explanation</th><th class="ar" dir="rtl">الشرح بالعربي</th></tr></thead><tbody><tr><td>Use option ___ to not have gzip replace the original file.</td><td><strong>A) -c</strong></td><td>-c writes output to stdout so the original can be kept.</td><td class="ar" dir="rtl">الخيار -c يخرج النتيجة إلى stdout ويمكن الحفاظ على الملف الأصلي.</td></tr><tr><td>_____ is a program that provides a service.</td><td><strong>C) Daemon</strong></td><td>A daemon is a background service program.</td><td class="ar" dir="rtl">daemon هو برنامج يقدم خدمة في الخلفية.</td></tr><tr><td>____ links are excellent for creating shortcuts.</td><td><strong>B) Soft</strong></td><td>Soft/symbolic links work as shortcuts to paths.</td><td class="ar" dir="rtl">soft/symbolic links تعمل كاختصارات للمسارات.</td></tr><tr><td>A ___ process prevents using the shell until it terminates.</td><td><strong>D) foreground</strong></td><td>Foreground process occupies the shell.</td><td class="ar" dir="rtl">العملية الأمامية تشغل الشل حتى تنتهي.</td></tr><tr><td>tar option to view file contents.</td><td><strong>D) all of the mentioned</strong></td><td>tf, -tf, and -tvf are valid forms/options for listing archive contents.</td><td class="ar" dir="rtl">كل الصيغ المذكورة مناسبة لعرض محتوى الأرشيف.</td></tr><tr><td>The bootloader represents ___ stage in booting.</td><td><strong>B) second</strong></td><td>Bootloader is the second stage in the provided revision.</td><td class="ar" dir="rtl">Bootloader هو المرحلة الثانية حسب المراجعة.</td></tr><tr><td>Number used to identify a process.</td><td><strong>A) pid</strong></td><td>PID identifies a process.</td><td class="ar" dir="rtl">PID هو رقم تعريف العملية.</td></tr><tr><td>Command listing all open files and accessing processes.</td><td><strong>B) lsof</strong></td><td>lsof lists open files.</td><td class="ar" dir="rtl">lsof يعرض الملفات المفتوحة والعمليات التي تستخدمها.</td></tr><tr><td>512 bytes containing machine code for booting.</td><td><strong>B) MBR</strong></td><td>MBR is 512 bytes and contains boot code/table context.</td><td class="ar" dir="rtl">MBR حجمه 512 بايت ويحتوي على كود الإقلاع.</td></tr><tr><td>_____ determine which programs execute after boot.</td><td><strong>B) Runlevels</strong></td><td>Runlevels determine system state/programs after boot.</td><td class="ar" dir="rtl">Runlevels تحدد حالة النظام والبرامج بعد الإقلاع.</td></tr><tr><td>Command used with Systemd for services.</td><td><strong>D) systemctl</strong></td><td>systemctl controls systemd services.</td><td class="ar" dir="rtl">systemctl يدير خدمات systemd.</td></tr><tr><td>File to set default shell of a system user?</td><td><strong>A) /etc/shells</strong></td><td>The revision answer is /etc/shells.</td><td class="ar" dir="rtl">إجابة المراجعة هي /etc/shells.</td></tr><tr><td>What does set -e do?</td><td><strong>B) Exits immediately if any command returns non-zero</strong></td><td>set -e stops script on command failure.</td><td class="ar" dir="rtl">set -e يوقف السكربت عند فشل أمر.</td></tr><tr><td>[[ &quot;$x&quot; =~ ^[A-Z]+$ ]] checks?</td><td><strong>B) x consists of one or more uppercase letters only</strong></td><td>Regex anchors require all characters to be uppercase letters.</td><td class="ar" dir="rtl">الـ regex يعني أن x يتكون من حرف كبير أو أكثر فقط.</td></tr></tbody></table></div></div>
+      <div class="card"><h3>Common Confusion Points / <span dir="rtl">نقاط تلخبط شائعة</span></h3><div class="table-wrap"><table><thead><tr><th>Confusion</th><th>Clarification</th><th class="ar" dir="rtl">التوضيح بالعربي</th></tr></thead><tbody>
+        <tr><td><code>locate</code> vs <code>find</code></td><td><code>locate</code> is fast and database-based; <code>find</code> searches live filesystem.</td><td class="ar" dir="rtl"><code>locate</code> سريع ويعتمد على قاعدة بيانات؛ <code>find</code> يبحث مباشرة في نظام الملفات.</td></tr>
+        <tr><td><code>></code> vs <code>>></code></td><td><code>></code> overwrites; <code>>></code> appends.</td><td class="ar" dir="rtl"><code>></code> يستبدل؛ <code>>></code> يضيف.</td></tr>
+        <tr><td><code>2></code> vs <code>&></code></td><td><code>2></code> redirects stderr; <code>&></code> redirects stdout and stderr.</td><td class="ar" dir="rtl"><code>2></code> يوجه الأخطاء؛ <code>&></code> يوجه الخرج العادي والأخطاء.</td></tr>
+        <tr><td><code>hard link</code> vs <code>soft link</code></td><td>Hard links share inode; soft links point to a path and can break.</td><td class="ar" dir="rtl">hard link يشارك نفس inode؛ soft link يشير لمسار وقد ينكسر.</td></tr>
+        <tr><td><code>while</code> vs <code>until</code></td><td><code>while</code> repeats while condition is true; <code>until</code> repeats while condition is false.</td><td class="ar" dir="rtl"><code>while</code> تكرر طالما الشرط صحيح؛ <code>until</code> تكرر طالما الشرط خطأ.</td></tr>
+        <tr><td><code>chmod +x script</code> vs <code>bash script</code></td><td><code>chmod +x</code> enables <code>./script</code>; <code>bash script</code> can run without executable bit.</td><td class="ar" dir="rtl"><code>chmod +x</code> يسمح بتشغيل <code>./script</code>؛ <code>bash script</code> يعمل بدون صلاحية تنفيذ.</td></tr>
+      </tbody></table></div></div>
+      <h3>Must Know Before the Exam / <span dir="rtl">لازم تعرف قبل الامتحان</span></h3>
+      <ul class="checklist"><li>☑ Write <code>if</code>, <code>for</code>, <code>while</code>, and file-test scripts.<br><span class="ar" dir="rtl">اكتب سكربتات if و for و while واختبارات الملفات.</span></li><li>☑ Explain <code>$?</code>, <code>$$</code>, <code>$#</code>, <code>$1</code>, and arrays.<br><span class="ar" dir="rtl">اشرح المتغيرات الخاصة والمصفوفات.</span></li><li>☑ Use <code>grep -n</code>, <code>sed -i</code>, and redirection safely.<br><span class="ar" dir="rtl">استخدم grep و sed وإعادة التوجيه بحذر.</span></li><li>☑ Understand PID, PPID, foreground/background, daemon, runlevel, and systemctl.<br><span class="ar" dir="rtl">افهم PID و PPID والعمليات الأمامية والخلفية و daemon و runlevel و systemctl.</span></li><li>☑ Know tar flags: <code>-c</code>, <code>-x</code>, <code>-t</code>, <code>-z</code>, <code>-J</code>, <code>-v</code>, <code>-f</code>.<br><span class="ar" dir="rtl">احفظ خيارات tar الأساسية.</span></li><li>☑ Compare hard link and soft link using inode behavior.<br><span class="ar" dir="rtl">قارن hard link و soft link من خلال inode.</span></li></ul>
+    </section>
+
+    <section id="quick-revision">
+      <h2>Quick Revision / <span dir="rtl">مراجعة سريعة</span></h2>
+      <div class="grid3"><div class="card"><h3>Key terms</h3><p><span class="pill">Kernel</span><span class="pill">Shell</span><span class="pill">Path</span><span class="pill">stdin</span><span class="pill">stdout</span><span class="pill">stderr</span><span class="pill">UID</span><span class="pill">GID</span><span class="pill">PID</span><span class="pill">Daemon</span><span class="pill">Runlevel</span><span class="pill">Inode</span><span class="pill">Hard Link</span><span class="pill">Soft Link</span></p></div><div class="card"><h3>Most important commands</h3><p><span class="pill">ls -la</span><span class="pill">find</span><span class="pill">grep</span><span class="pill">sed</span><span class="pill">chmod</span><span class="pill">useradd</span><span class="pill">usermod</span><span class="pill">ps aux</span><span class="pill">top</span><span class="pill">pkill</span><span class="pill">systemctl</span><span class="pill">tar</span><span class="pill">stat</span><span class="pill">ln -s</span></p></div><div class="card"><h3>Security concepts</h3><p><span class="pill">Root UID 0</span><span class="pill">/etc/shadow</span><span class="pill">sudo logs</span><span class="pill">least privilege</span><span class="pill">permissions</span><span class="pill">account lock</span><span class="pill">safe deletion</span><span class="pill">backup</span></p></div></div>
+      <div class="card"><h3>Short bilingual bullet summaries / <span dir="rtl">ملخص سريع بالعربي والإنجليزي</span></h3><div class="grid"><ul><li>Shell is the command-line bridge between user and operating system.</li><li>Use paths carefully before copy, move, remove, or edit operations.</li><li>Redirection separates normal output and errors.</li><li>Permissions control read, write, and execute access.</li><li>Bash scripts need correct syntax: spaces in tests, no spaces around assignment.</li><li>Final revision strongly focuses on scripts and output prediction.</li></ul><ul class="ar" dir="rtl"><li>الشل هو واجهة سطر الأوامر بين المستخدم ونظام التشغيل.</li><li>استخدم المسارات بحذر قبل النسخ أو النقل أو الحذف أو التعديل.</li><li>إعادة التوجيه تفصل الخرج العادي عن الأخطاء.</li><li>الصلاحيات تتحكم في القراءة والكتابة والتنفيذ.</li><li>سكربتات Bash تحتاج صيغة صحيحة: مسافات داخل الاختبارات ولا توجد مسافات حول =.</li><li>المراجعة النهائية تركز بقوة على السكربتات وتوقع المخرجات.</li></ul></div></div>
+    </section>
+    <footer><p>Single self-contained offline HTML file — updated with labs and final revision questions.</p><p class="ar" dir="rtl">ملف HTML واحد يعمل بدون إنترنت — محدث باللابات وأسئلة المراجعة النهائية.</p></footer>
+  </main>
+</body>
+</html>
