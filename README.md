@@ -38,5 +38,4 @@ No internet connection is required.
 
 All content is based on the provided course lectures, labs, and revision materials.
 
-```
 
